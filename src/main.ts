@@ -4,7 +4,7 @@ import '@/styles/index.scss';
 
 import { createHead } from '@vueuse/head';
 import { setupStore } from '@/store';
-// import { setupI18n } from '@/locales';
+import { setupI18n } from '@/locales';
 // import { router, setupRouter } from '@/router';
 import { worker } from '@/api/mocks/browser';
 // import { setupRouterGuard } from '@/router/guard';
@@ -24,7 +24,7 @@ function setupApp() {
   // 配置 store
   setupStore(app);
   // 多语言
-  // setupI18n(app);
+  setupI18n(app);
   // 配置路由
   // setupRouter(app);
   // 路由守卫
