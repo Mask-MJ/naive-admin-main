@@ -19,7 +19,7 @@ export function configAutoImportPlugin() {
         },
       ],
       vueTemplate: true,
-      dirs: ['src/store/modules', 'src/components/common'],
+      dirs: ['src/store/modules', 'src/components/Common'],
       dts: 'types/auto-imports.d.ts',
     }),
     Components({

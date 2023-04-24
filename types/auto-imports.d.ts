@@ -5,6 +5,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope'];
+  const THEME_SETTINGS: typeof import('../src/store/modules/theme')['THEME_SETTINGS'];
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed'];
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef'];
   const computed: typeof import('vue')['computed'];
@@ -242,6 +243,7 @@ declare global {
   const useTextDirection: typeof import('@vueuse/core')['useTextDirection'];
   const useTextSelection: typeof import('@vueuse/core')['useTextSelection'];
   const useTextareaAutosize: typeof import('@vueuse/core')['useTextareaAutosize'];
+  const useThemeStore: typeof import('../src/store/modules/theme')['useThemeStore'];
   const useThrottle: typeof import('@vueuse/core')['useThrottle'];
   const useThrottleFn: typeof import('@vueuse/core')['useThrottleFn'];
   const useThrottledRefHistory: typeof import('@vueuse/core')['useThrottledRefHistory'];
@@ -304,6 +306,9 @@ import { UnwrapRef } from 'vue';
 declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>;
+    readonly THEME_SETTINGS: UnwrapRef<
+      typeof import('../src/store/modules/theme')['THEME_SETTINGS']
+    >;
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>;
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>;
     readonly computed: UnwrapRef<typeof import('vue')['computed']>;
@@ -561,6 +566,7 @@ declare module 'vue' {
     readonly useTextDirection: UnwrapRef<typeof import('@vueuse/core')['useTextDirection']>;
     readonly useTextSelection: UnwrapRef<typeof import('@vueuse/core')['useTextSelection']>;
     readonly useTextareaAutosize: UnwrapRef<typeof import('@vueuse/core')['useTextareaAutosize']>;
+    readonly useThemeStore: UnwrapRef<typeof import('../src/store/modules/theme')['useThemeStore']>;
     readonly useThrottle: UnwrapRef<typeof import('@vueuse/core')['useThrottle']>;
     readonly useThrottleFn: UnwrapRef<typeof import('@vueuse/core')['useThrottleFn']>;
     readonly useThrottledRefHistory: UnwrapRef<

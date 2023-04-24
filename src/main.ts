@@ -1,7 +1,14 @@
 import { createApp } from 'vue';
 import 'uno.css';
+
+import { createHead } from '@vueuse/head';
 import App from './App.vue';
+import AppLoading from '@/components/Common/AppLoading.vue';
+import { setupStore } from '@/store';
+// import { setupI18n } from '@/locales';
+// import { router, setupRouter } from '@/router';
 import { worker } from '@/api/mocks/browser';
+// import { setupRouterGuard } from '@/router/guard';
 
 if (process.env.NODE_ENV === 'development') {
   worker.start({
@@ -9,4 +16,19 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-createApp(App).mount('#app');
+function setupApp() {
+  const appLoading = createApp(AppLoading);
+  appLoading.mount('#appLoading');
+  const app = createApp(App);
+  // 配置 store
+  setupStore(app);
+  // 多语言
+  // setupI18n(app);
+  // 配置路由
+  // setupRouter(app);
+  // 路由守卫
+  // setupRouterGuard(router);
+  app.use(createHead()).mount('#app');
+}
+
+setupApp();
