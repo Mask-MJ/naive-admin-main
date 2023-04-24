@@ -40,6 +40,7 @@
     "eslint-plugin-vue": "^9.11.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.1",
+    "msw": "^1.2.1",
     "prettier": "^2.8.8",
     "sass": "^1.62.0",
     "typescript": "^5.0.2",
@@ -65,7 +66,7 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+    "{!(package)*.json,*.code-snippets,.!(npm)*rc}": [
       "prettier --write--parser json"
     ],
     "package.json": [
@@ -81,5 +82,8 @@
     "*.md": [
       "prettier --write"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
