@@ -9,19 +9,15 @@ import pages from '~pages';
 export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRecordRaw[]): Menu[] {
   const menuList: Menu[] = [];
   // 判断后台返回的路由对象是否在文件路由中存在
-  function getLabel(route: RouteList, parentTree?: Menu) {
+  function getLabel(route: RouteList) {
     // 获取拼接的 route.name 来和 真实文件路由列表对比
     if (route.children && route.children.length) {
       return route.meta.title ?? route.name;
     } else if (route.meta.link) {
       return () =>
-        h(
-          'a',
-          { href: route.meta.link, target: '_blank', rel: 'noopenner noreferrer' },
-          route.meta.title ?? route.name,
-        );
+        h('a', { href: route.meta.link, target: '_blank' }, route.meta.title ?? route.name);
     } else {
-      const path = `/${parentTree!.key}/${route.name}`;
+      const path = route.path;
       const hasRoute = find(
         newRoutes,
         (n) => n.path.toLocaleLowerCase() === path.toLocaleLowerCase(),
@@ -38,8 +34,8 @@ export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRec
   function recursionRoutes(routes: RouteList[], parentTree?: Menu) {
     routes.forEach((route) => {
       const menu: Menu = {
-        label: getLabel(route, parentTree),
-        key: (parentTree ? `${parentTree.key}/${route.name}` : route.name).toLocaleLowerCase(),
+        label: getLabel(route),
+        key: route.path.toLocaleLowerCase(),
         show: !route.meta.hidden,
         icon: () => h('i', { class: `i-${route.meta.icon}` }),
       };
