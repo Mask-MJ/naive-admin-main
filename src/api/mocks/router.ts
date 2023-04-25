@@ -12,7 +12,7 @@ export const routers = [
     },
     children: [
       {
-        name: 'dashboard-worktable',
+        name: 'worktable',
         path: '/dashboard/worktable',
         meta: {
           title: '个人工作台',
@@ -21,19 +21,6 @@ export const routers = [
           show: true,
           order: 1,
         },
-        // children: [
-        //   {
-        //     name: 'dashboard-worktable-222',
-        //     path: '/dashboard/worktable-222',
-        //     meta: {
-        //       title: '个人工作台',
-        //       icon: 'carbon:workspace',
-        //       keepAlive: true,
-        //       show: true,
-        //       order: 1,
-        //     },
-        //   },
-        // ],
       },
     ],
   },
