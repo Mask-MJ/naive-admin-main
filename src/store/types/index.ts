@@ -20,9 +20,9 @@ export interface AppState {
   /** 项目配置的抽屉可见状态 */
   settingDrawerVisible: boolean;
   /** 侧边栏折叠状态 */
-  sidebarCollapse: boolean;
+  siderCollapse: boolean;
   /** vertical-mix模式下 侧边栏的固定状态 */
-  mixSidebarFixed: boolean;
+  mixSiderFixed: boolean;
 }
 
 export interface RouterState {
