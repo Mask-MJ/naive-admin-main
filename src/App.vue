@@ -1,25 +1,37 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { dateZhCN, zhCN } from 'naive-ui';
+  import subscribeThemeStore from '@/settings/theme/subscribeTheme';
+  import { getPictureCode, loginApi } from '@/api/modules/basic/user';
+  import { getAppEnvConfig } from '@/utils';
+
+  const { VITE_GLOB_APP_TITLE } = getAppEnvConfig();
+  useHead({ title: VITE_GLOB_APP_TITLE });
+
+  const theme = useThemeStore();
+
+  subscribeThemeStore();
+
+  onMounted(async () => {
+    await getPictureCode();
+    await loginApi({
+      username: 'admin',
+      password: 'admin123',
+      code: '1',
+      uuid: 'e34b77db035e4fa3a367166d0f341956',
+    });
+  });
+</script>
+
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
+  <n-config-provider
+    :theme="theme.naiveTheme"
+    :theme-overrides="theme.naiveThemeOverrides"
+    :locale="zhCN"
+    :date-locale="dateZhCN"
+    class="h-full"
+  >
+    <naive-provider>
+      <router-view />
+    </naive-provider>
+  </n-config-provider>
 </template>
-<style scoped>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.vue:hover {
-    filter: drop-shadow(0 0 2em #42b883aa);
-  }
-</style>

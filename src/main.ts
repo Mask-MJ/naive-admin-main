@@ -5,9 +5,10 @@ import '@/styles/index.scss';
 import { createHead } from '@vueuse/head';
 import { setupStore } from '@/store';
 import { setupI18n } from '@/locales';
-// import { router, setupRouter } from '@/router';
+import { router, setupRouter } from '@/router';
 import { worker } from '@/api/mocks/browser';
-// import { setupRouterGuard } from '@/router/guard';
+import { setupRouterGuard } from '@/router/permissionGuard';
+
 import App from './App.vue';
 import AppLoading from '@/components/Common/AppLoading.vue';
 
@@ -26,9 +27,9 @@ function setupApp() {
   // 多语言
   setupI18n(app);
   // 配置路由
-  // setupRouter(app);
+  setupRouter(app);
   // 路由守卫
-  // setupRouterGuard(router);
+  setupRouterGuard(router);
   app.use(createHead()).mount('#app');
 }
 
