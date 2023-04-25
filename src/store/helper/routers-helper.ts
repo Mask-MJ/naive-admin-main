@@ -36,7 +36,7 @@ export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRec
       const menu: Menu = {
         label: getLabel(route),
         key: route.path.toLocaleLowerCase(),
-        show: !route.meta.hidden,
+        show: route.meta.show,
         icon: () => h('i', { class: `i-${route.meta.icon}` }),
       };
       if (parentTree) {

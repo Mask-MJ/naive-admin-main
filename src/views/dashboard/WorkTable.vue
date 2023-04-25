@@ -1,4 +1,4 @@
-<script setup lang="ts" name="dashboard-WorkTable">
+<script setup lang="ts">
   const a = ref('');
   const routerStore = useRouterStore();
   const menuOptions = computed(() => routerStore.menuList);
