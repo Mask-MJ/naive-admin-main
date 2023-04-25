@@ -6,6 +6,8 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope'];
   const THEME_SETTINGS: typeof import('../src/store/modules/theme')['THEME_SETTINGS'];
+  const TOKEN_KEY: typeof import('../src/store/modules/user')['TOKEN_KEY'];
+  const USER_INFO_KEY: typeof import('../src/store/modules/user')['USER_INFO_KEY'];
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed'];
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef'];
   const computed: typeof import('vue')['computed'];
@@ -221,6 +223,7 @@ declare global {
   const useResizeObserver: typeof import('@vueuse/core')['useResizeObserver'];
   const useRoute: typeof import('vue-router')['useRoute'];
   const useRouter: typeof import('vue-router')['useRouter'];
+  const useRouterStore: typeof import('../src/store/modules/router')['useRouterStore'];
   const useScreenOrientation: typeof import('@vueuse/core')['useScreenOrientation'];
   const useScreenSafeArea: typeof import('@vueuse/core')['useScreenSafeArea'];
   const useScriptTag: typeof import('@vueuse/core')['useScriptTag'];
@@ -259,6 +262,7 @@ declare global {
   const useTransition: typeof import('@vueuse/core')['useTransition'];
   const useUrlSearchParams: typeof import('@vueuse/core')['useUrlSearchParams'];
   const useUserMedia: typeof import('@vueuse/core')['useUserMedia'];
+  const useUserStore: typeof import('../src/store/modules/user')['useUserStore'];
   const useVModel: typeof import('@vueuse/core')['useVModel'];
   const useVModels: typeof import('@vueuse/core')['useVModels'];
   const useVibrate: typeof import('@vueuse/core')['useVibrate'];
@@ -309,6 +313,8 @@ declare module 'vue' {
     readonly THEME_SETTINGS: UnwrapRef<
       typeof import('../src/store/modules/theme')['THEME_SETTINGS']
     >;
+    readonly TOKEN_KEY: UnwrapRef<typeof import('../src/store/modules/user')['TOKEN_KEY']>;
+    readonly USER_INFO_KEY: UnwrapRef<typeof import('../src/store/modules/user')['USER_INFO_KEY']>;
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>;
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>;
     readonly computed: UnwrapRef<typeof import('vue')['computed']>;
@@ -544,6 +550,9 @@ declare module 'vue' {
     readonly useResizeObserver: UnwrapRef<typeof import('@vueuse/core')['useResizeObserver']>;
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>;
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>;
+    readonly useRouterStore: UnwrapRef<
+      typeof import('../src/store/modules/router')['useRouterStore']
+    >;
     readonly useScreenOrientation: UnwrapRef<typeof import('@vueuse/core')['useScreenOrientation']>;
     readonly useScreenSafeArea: UnwrapRef<typeof import('@vueuse/core')['useScreenSafeArea']>;
     readonly useScriptTag: UnwrapRef<typeof import('@vueuse/core')['useScriptTag']>;
@@ -584,6 +593,7 @@ declare module 'vue' {
     readonly useTransition: UnwrapRef<typeof import('@vueuse/core')['useTransition']>;
     readonly useUrlSearchParams: UnwrapRef<typeof import('@vueuse/core')['useUrlSearchParams']>;
     readonly useUserMedia: UnwrapRef<typeof import('@vueuse/core')['useUserMedia']>;
+    readonly useUserStore: UnwrapRef<typeof import('../src/store/modules/user')['useUserStore']>;
     readonly useVModel: UnwrapRef<typeof import('@vueuse/core')['useVModel']>;
     readonly useVModels: UnwrapRef<typeof import('@vueuse/core')['useVModels']>;
     readonly useVibrate: UnwrapRef<typeof import('@vueuse/core')['useVibrate']>;

@@ -30,6 +30,7 @@
     // eslint (http://eslint.cn/docs/rules)
     // 要求使用 let 或 const 而不是 var
     "no-var": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     // 不允许多个空行
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     // 禁止在 函数/类/变量 定义之前使用它们
