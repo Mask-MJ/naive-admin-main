@@ -9,7 +9,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
   const viteEnv = wrapperEnv(env);
   const { VITE_PORT, VITE_PROXY, VITE_DROP_CONSOLE, VITE_PUBLIC_PATH } = viteEnv;
   return {
-    base: VITE_PUBLIC_PATH,
+    base: '/naive-admin-main/',
     root,
     resolve: {
       alias: {
