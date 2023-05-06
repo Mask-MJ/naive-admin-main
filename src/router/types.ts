@@ -18,6 +18,8 @@ declare module 'vue-router' {
     order: number;
     // 父级名称
     parentName?: string;
+    // 父级id
+    parentId?: string;
     // 是否固定 不可关闭
     affix?: boolean;
   }

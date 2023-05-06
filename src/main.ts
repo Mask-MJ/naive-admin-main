@@ -6,17 +6,17 @@ import { createHead } from '@vueuse/head';
 import { setupStore } from '@/store';
 import { setupI18n } from '@/locales';
 import { router, setupRouter } from '@/router';
-import { worker } from '@/api/mocks/browser';
+// import { worker } from '@/api/mocks/browser';
 import { setupRouterGuard } from '@/router/permissionGuard';
 
 import App from './App.vue';
 import AppLoading from '@/components/Common/AppLoading.vue';
 
-if (process.env.NODE_ENV === 'development') {
-  worker.start({
-    onUnhandledRequest: 'bypass',
-  });
-}
+// if (process.env.NODE_ENV === 'development') {
+//   worker.start({
+//     onUnhandledRequest: 'bypass',
+//   });
+// }
 
 function setupApp() {
   const appLoading = createApp(AppLoading);

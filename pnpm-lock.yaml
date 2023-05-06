@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@commitlint/cli': ^17.6.1
   '@commitlint/config-conventional': ^17.6.1
+  '@iconify-json/ant-design': ^1.1.5
   '@iconify-json/carbon': ^1.1.16
   '@iconify-json/line-md': ^1.1.24
   '@intlify/unplugin-vue-i18n': ^0.10.0
@@ -64,6 +65,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli': 17.6.1
   '@commitlint/config-conventional': 17.6.1
+  '@iconify-json/ant-design': 1.1.5
   '@iconify-json/carbon': 1.1.16
   '@iconify-json/line-md': 1.1.24
   '@intlify/unplugin-vue-i18n': 0.10.0_vue-i18n@9.2.2
@@ -871,6 +873,12 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/ant-design/1.1.5:
+    resolution: {integrity: sha512-lNEC95u9QdmS3GfMLnbAjLZCfQ9i4xURyn7P4UVHa6ejjLjs5FVyi/J+itrmnBpwb36YZo4CT0GDIn2AgvkNng==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify-json/carbon/1.1.16:

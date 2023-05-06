@@ -1,12 +1,42 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { cloneDeep, find, isArray } from 'lodash-es';
-import { RouterLink } from 'vue-router';
 import type { Menu } from '@/router/types';
 import type { RouteList } from '@/api/modules/basic/types/user';
+
+import { find, filter, map, uniq } from 'lodash-es';
+import { RouterLink } from 'vue-router';
 import pages from '~pages';
 
+function getFlatData(data: RouteList[], parentTree?: RouteList) {
+  const flatData: Omit<RouteList, 'children'>[] = [];
+  data.map((item) => {
+    const { children, path, meta, ...node } = item;
+    const newRoute = {
+      path: (parentTree ? `${parentTree.path}/${item.path}` : path).toLowerCase(),
+      meta: { id: node.id, parentId: node.parentId, ...meta },
+      ...node,
+    };
+    flatData.push(newRoute, ...(children ? getFlatData(children, item) : []));
+  });
+  return flatData;
+}
+
+function treeShaking(treeData: RouteList[], ids: string[]) {
+  return filter(treeData, (value) => ids.includes(value.id)).map((item) => {
+    item.children && item.children.length && (item.children = treeShaking(item.children, ids));
+    return item;
+  });
+}
+
+// 扁平化路由 并且和文件路由匹配
+export function flatMapRoutes(RouteList: RouteList[]) {
+  const result = getFlatData(RouteList);
+  return pages.filter((item) => find(result, (n) => n.path === item.path && (item.meta = n.meta)));
+}
 // 把路由对象转换为菜单对象
-export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRecordRaw[]): Menu[] {
+export function transformRouteToMenu(RouteList: RouteList[], newRoutes: RouteRecordRaw[]): Menu[] {
+  // 提取出所有的父级id 和 id, 并去重
+  const ids = uniq(map(newRoutes, 'meta.parentId').concat(map(newRoutes, 'meta.id')));
+  const filterTree = treeShaking(RouteList, ids);
   const menuList: Menu[] = [];
   // 判断后台返回的路由对象是否在文件路由中存在
   function getLabel(route: RouteList) {
@@ -14,14 +44,10 @@ export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRec
     if (route.children && route.children.length) {
       return route.meta.title ?? route.name;
     } else if (route.meta.link) {
-      return () =>
-        h('a', { href: route.meta.link, target: '_blank' }, route.meta.title ?? route.name);
+      return () => h('a', { href: route.meta.link, target: '_blank' }, route.meta.title);
     } else {
-      const path = route.path;
-      const hasRoute = find(
-        newRoutes,
-        (n) => n.path.toLocaleLowerCase() === path.toLocaleLowerCase(),
-      );
+      const path = route.path.toLocaleLowerCase();
+      const hasRoute = find(newRoutes, (n) => n.path === path);
       return () =>
         h(
           RouterLink,
@@ -33,10 +59,11 @@ export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRec
 
   function recursionRoutes(routes: RouteList[], parentTree?: Menu) {
     routes.forEach((route) => {
+      parentTree && (route.path = `${parentTree.key}/${route.path}`.toLocaleLowerCase());
       const menu: Menu = {
         label: getLabel(route),
-        key: route.path.toLocaleLowerCase(),
-        show: route.meta.show,
+        key: route.path,
+        show: !route.hidden,
         icon: () => h('i', { class: `i-${route.meta.icon}` }),
       };
       if (parentTree) {
@@ -48,28 +75,6 @@ export function transformRouteToMenu(routeList: RouteList[], newRoutes: RouteRec
       route.children && recursionRoutes(route.children, menu);
     });
   }
-  recursionRoutes(routeList);
+  recursionRoutes(filterTree);
   return menuList;
-}
-
-// 扁平化路由 并且和文件路由匹配
-export function flatMapRoutes(RouteList: RouteList[]) {
-  const routerStore = useRouterStore();
-  const routes = cloneDeep(RouteList);
-  const newRoutes: RouteRecordRaw[] = [];
-  const cacheList: string[] = [];
-  function deptRoutes(routes: RouteList[] = []) {
-    routes.forEach((route) => {
-      const newRoute = find(pages, (n) => n.path === route.path);
-      if (newRoute) {
-        newRoute.meta = route.meta;
-        route.meta.keepAlive && cacheList.push(newRoute.name as string);
-        newRoutes.push(newRoute);
-      }
-      isArray(route.children) && deptRoutes(route.children);
-    });
-  }
-  deptRoutes(routes);
-  routerStore.setCacheRoutes(cacheList);
-  return newRoutes;
 }

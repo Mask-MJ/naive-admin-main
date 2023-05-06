@@ -32,6 +32,8 @@ export interface UserInfo {
 }
 
 export interface RouteList {
+  id: string;
+  parentId: string;
   hidden: boolean;
   meta: RouteMeta;
   name: string;

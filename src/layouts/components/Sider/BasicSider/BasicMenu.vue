@@ -30,6 +30,7 @@
 <template>
   <n-scrollbar>
     <n-menu
+      class="side-menu"
       :value="activeKey"
       :collapsed="app.siderCollapse"
       :collapsed-width="theme.sider.collapsedWidth"
@@ -44,4 +45,19 @@
   </n-scrollbar>
 </template>
 
-<style scoped></style>
+<style lang="scss">
+  .side-menu:not(.n-menu--collapsed) {
+    .n-menu-item-content {
+      &::before {
+        left: 5px;
+        right: 5px;
+      }
+      &.n-menu-item-content--selected,
+      &:hover {
+        &::before {
+          border-left: 4px solid var(--primary-color);
+        }
+      }
+    }
+  }
+</style>

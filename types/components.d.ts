@@ -19,6 +19,7 @@ declare module '@vue/runtime-core' {
     NButton: typeof import('naive-ui')['NButton'];
     NColorPicker: typeof import('naive-ui')['NColorPicker'];
     NConfigProvider: typeof import('naive-ui')['NConfigProvider'];
+    NDataTable: typeof import('naive-ui')['NDataTable'];
     NDialogProvider: typeof import('naive-ui')['NDialogProvider'];
     NDivider: typeof import('naive-ui')['NDivider'];
     NDrawer: typeof import('naive-ui')['NDrawer'];
@@ -27,6 +28,7 @@ declare module '@vue/runtime-core' {
     NGradientText: typeof import('naive-ui')['NGradientText'];
     NGrid: typeof import('naive-ui')['NGrid'];
     NGridItem: typeof import('naive-ui')['NGridItem'];
+    NIcon: typeof import('naive-ui')['NIcon'];
     NImage: typeof import('naive-ui')['NImage'];
     NInput: typeof import('naive-ui')['NInput'];
     NInputNumber: typeof import('naive-ui')['NInputNumber'];
@@ -48,5 +50,7 @@ declare module '@vue/runtime-core' {
     NTooltip: typeof import('naive-ui')['NTooltip'];
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
+    Table: typeof import('./../src/components/Table/index.vue')['default'];
+    Toolbars: typeof import('./../src/components/Table/components/Toolbars.vue')['default'];
   }
 }
