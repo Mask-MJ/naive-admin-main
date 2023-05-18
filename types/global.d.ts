@@ -8,6 +8,10 @@ declare interface Fn<T = any, R = T> {
   (...arg: T[]): R;
 }
 
+declare interface ChangeEvent extends Event {
+  target: HTMLInputElement;
+}
+
 interface Window {
   $loadingBar: import('naive-ui').LoadingBarProviderInst;
   $dialog: import('naive-ui').DialogProviderInst;

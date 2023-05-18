@@ -3,7 +3,6 @@ import type {
   FormItemGiProps,
   GridItemProps,
   GridProps,
-  FormItemRule,
   FormProps,
   FormInst,
 } from 'naive-ui';
@@ -57,7 +56,6 @@ export type FormSchema = ComponentMap &
     path: string;
     suffix?: string | number | ((values: RenderCallbackParams) => string | number); // 组件后面插槽
     changeEvent?: string; // 表单更新事件名称
-    // giProps?: Partial<GridItemProps>;
     defaultValue?: any; // 所渲渲染组件的初始值
     show?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
     ifShow?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否显示，js 控制，会删除 dom
@@ -68,8 +66,8 @@ export type FormSchema = ComponentMap &
       | VNode[]
       | string; // 自定义渲染组内部的 slot
     slot?: string; // 自定义 slot，渲染组件
-    dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否禁用
-    dynamicRules?: (renderCallbackParams: RenderCallbackParams) => FormItemRule[]; // 动态判返当前组件的校验规则
+    // dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean); // 动态判断当前组件是否禁用
+    // dynamicRules?: (renderCallbackParams: RenderCallbackParams) => FormItemRule[]; // 动态判返当前组件的校验规则
   };
 
 // 扩展form组件配置

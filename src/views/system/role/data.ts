@@ -1,6 +1,7 @@
 // import type { BasicColumn } from '@/components/Table';
 import type { FormSchema } from '@/components/Form/types';
 // import type { RoleList } from '@/api/system/types/role';
+import { NInput } from 'naive-ui';
 
 // import { NPopconfirm, NSwitch } from 'naive-ui';
 // import { setRoleStatus } from '@/api/system/role';
@@ -88,6 +89,8 @@ export const schemas: FormSchema[] = [
     label: '角色名称',
     span: 8,
     componentProps: { placeholder: '输入角色名称' },
+    slot: 'ids',
+    renderComponentContent: () => ({ suffix: () => '角色名称' }),
   },
   {
     path: 'roleKey',
@@ -95,6 +98,15 @@ export const schemas: FormSchema[] = [
     label: '权限字符',
     span: 8,
     componentProps: { placeholder: '输入权限字符' },
+    render: ({ model, path }) => {
+      return h(NInput, {
+        placeholder: '请输入',
+        value: model[path],
+        onUpdateValue: (e) => {
+          model[path] = e;
+        },
+      });
+    },
   },
   {
     path: 'status',
@@ -112,8 +124,7 @@ export const schemas: FormSchema[] = [
     path: '[beginTime, endTime]',
     component: 'NDatePicker',
     label: '创建时间',
-    changeEvent: 'update:formatted-value',
-    span: 16,
+    span: 24,
     componentProps: {
       type: 'datetimerange',
       valueFormat: 'yyyy-MM-dd HH:mm:ss',

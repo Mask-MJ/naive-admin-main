@@ -11,13 +11,14 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     2: typeof import('./../src/components/Form/components/FormGrid copy 2.vue')['default'];
     AppLoading: typeof import('./../src/components/Common/AppLoading.vue')['default'];
-    copy: typeof import('./../src/components/Form/components/FormGrid copy.vue')['default'];
+    copy: typeof import('./../src/components/Form/index copy.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/Common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/Common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
     Form2: typeof import('./../src/components/Form2/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
     FormGrid: typeof import('./../src/components/Form/components/FormGrid.vue')['default'];
+    FormItemComponent: typeof import('./../src/components/Form/components/FormItemComponent.vue')['default'];
     HoverContainer: typeof import('./../src/components/Common/HoverContainer.vue')['default'];
     NaiveProvider: typeof import('./../src/components/Common/NaiveProvider.vue')['default'];
     NAvatar: typeof import('naive-ui')['NAvatar'];

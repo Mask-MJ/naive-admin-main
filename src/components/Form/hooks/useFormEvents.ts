@@ -67,6 +67,7 @@ export function useFormEvents({
     try {
       await validate();
       const res = handleFormValues(formModel);
+      // console.log('submit', res);
       emits('submit', res);
     } catch (error: any) {
       throw new Error(error);

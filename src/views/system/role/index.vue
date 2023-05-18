@@ -24,7 +24,13 @@
 
 <template>
   <div>
-    <Form @register="registerForm" />
+    <Form @register="registerForm">
+      <template #ids="{ model, path }">
+        <n-input v-model:value="model[path]">
+          <template #prefix> asd </template>
+        </n-input>
+      </template>
+    </Form>
     <Table :columns="columns" :data="data" :bordered="false" />
   </div>
 </template>
