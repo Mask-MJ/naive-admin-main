@@ -45,6 +45,8 @@ components:
     queryText: 查询
     inputText: 请输入
     chooseText: 请选择
+    startTime: 开始时间
+    endTime: 结束时间
     maxTip: '字符数应小于{0}位'
     iconPlaceholder: 点击选择图标
   table:

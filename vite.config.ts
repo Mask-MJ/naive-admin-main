@@ -19,7 +19,8 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     },
     server: {
       https: true,
-      host: '127.0.0.1',
+      // host: '127.0.0.1',
+      host: true,
       port: VITE_PORT,
       proxy: createProxy(VITE_PROXY),
     },

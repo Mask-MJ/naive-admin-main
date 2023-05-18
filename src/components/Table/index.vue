@@ -128,9 +128,9 @@
   <!-- 表格内容 card -->
   <div class="basic-table">
     <!-- 表格头部 操作按钮 -->
-    <div class="table-header">
-      <div class="header-button-lf">
-        <slot name="tableHeader" />
+    <div class="flex-between">
+      <div class="mt-2">
+        <slot name="toolbar" />
       </div>
       <Toolbars v-if="showToolbars" @table-action="toolbarsAction" />
     </div>
