@@ -1,8 +1,19 @@
-import type { DataTableProps, PaginationProps, DataTableColumn } from 'naive-ui';
+import type {
+  DataTableProps,
+  PaginationProps,
+  DataTableColumn,
+  ButtonProps,
+  PopconfirmProps,
+  TooltipProps,
+  DropdownOption,
+} from 'naive-ui';
 import type { RowKey, RowData, OnUpdateCheckedRowKeys } from 'naive-ui/es/data-table/src/interface';
+// import type { Size } from 'naive-ui/es/button/src/interface';
+import type { BasicFormProps } from '@/components/Form';
+
 // 扩展 column
 export type BasicColumn<T = any> = DataTableColumn<T> & {
-  // key: String;
+  key: String;
   // 内部标识 , 序号 | 操作
   flag?: 'INDEX' | 'ACTION';
   slots?: Recordable;
@@ -24,7 +35,7 @@ export interface FetchSetting {
   totalField: string;
 }
 
-export interface BasicTableProps extends Omit<DataTableProps, 'rowKey'> {
+export interface BasicTableProps extends DataTableProps {
   // 列配置项
   columns: BasicColumn[];
   // 接口请求对象
@@ -43,9 +54,8 @@ export interface BasicTableProps extends Omit<DataTableProps, 'rowKey'> {
   searchInfo?: Recordable;
   // 使用搜索表单
   useSearchForm?: boolean;
-  rowKey: string;
   // 表单配置
-  // formConfig?: Partial<BasicFormProps>;
+  formConfig?: Partial<BasicFormProps>;
   // 在分页改变的时候清空选项
   clearSelectOnPageChange?: boolean;
   // 操作栏
@@ -67,7 +77,7 @@ export interface FetchParams {
   page?: number;
 }
 
-// 表单事件
+// 表格事件
 export interface TableActionType {
   // 选择栏
   /** 获取选择的行数据 */
@@ -125,3 +135,46 @@ export interface GetColumnsParams {
   ignoreIndex?: boolean;
   ignoreAction?: boolean;
 }
+
+// export interface ActionItem extends ButtonProps {
+//   onClick?: Fn;
+//   label?: string;
+//   color?: 'success' | 'error' | 'warning';
+//   icon?: string;
+//   popConfirm?: PopconfirmProps;
+//   disabled?: boolean;
+//   divider?: boolean;
+//   // 权限编码控制是否显示
+//   auth?: string | string[];
+//   // 业务控制是否显示
+//   ifShow?: boolean | ((action: ActionItem) => boolean);
+//   tooltip?: string | TooltipProps;
+//   showTooltip?: boolean;
+//   size?: Size;
+// }
+// export interface ActionItem2 extends DropdownOption {
+//   props?: ButtonProps;
+// }
+// export type ActionItem = DropdownOption & {
+//   onClick?: Fn;
+//   label?: string;
+//   popConfirm?: PopconfirmProps;
+//   tooltip?: string | TooltipProps;
+//   icon?: string;
+//   auth?: string | string[];
+// };
+
+export interface ActionItem {
+  label?: string;
+  popConfirmProps?: PopconfirmProps & { content: string };
+  tooltipProps?: TooltipProps & { content: string };
+  buttonProps?: ButtonProps;
+  icon?: string;
+  auth?: string | string[];
+  // 业务控制是否显示
+  ifShow?: boolean | ((action: ActionItem) => boolean);
+}
+
+export type DropdownItem = DropdownOption & {
+  props?: DropdownOption['props'] & { icon?: string };
+};

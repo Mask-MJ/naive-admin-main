@@ -1,5 +1,5 @@
 import type { PropType } from 'vue';
-// import type { BasicFormProps } from '@/components/Form';
+import type { BasicFormProps } from '@/components/Form';
 import type { FetchSetting, BasicColumn } from './types';
 import type { DataTableColumn } from 'naive-ui';
 import { dataTableProps } from 'naive-ui';
@@ -14,7 +14,7 @@ export const basicProps = {
   remote: { type: Boolean, default: true },
   tableLayout: { type: String, default: 'fixed' },
   size: { type: String, default: 'small' },
-  scrollX: { type: Number, default: 1000 },
+  // scrollX: { type: Number, default: 1800 },
   // 扩展
   // 请求接口
   api: { type: Function as PropType<(...arg: any[]) => Promise<any>>, default: null },
@@ -33,7 +33,7 @@ export const basicProps = {
   // 使用搜索表单
   useSearchForm: { type: Boolean, default: false },
   // 表单配置
-  // formConfig: { type: Object as PropType<Partial<BasicFormProps>>, default: null },
+  formConfig: { type: Object as PropType<Partial<BasicFormProps>>, default: null },
   rowKey: { type: String, default: 'id' },
   // 文本超过宽度是否显示... | 带提示的省略
   ellipsis: { type: [Boolean, Object], default: () => ({ tooltip: true }) },

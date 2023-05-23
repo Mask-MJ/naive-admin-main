@@ -11,7 +11,7 @@ interface ActionType {
   getPagination: () => boolean | PaginationProps;
   setPagination: (info: Partial<PaginationProps>) => void;
   setLoading: (loading: boolean) => void;
-  getFieldsValue: () => Recordable;
+  getPathsValue: () => Recordable;
   clearSelectedRowKeys: () => void;
 }
 
@@ -22,7 +22,7 @@ export function useDataSource(
     getPagination,
     setPagination,
     setLoading,
-    getFieldsValue,
+    getPathsValue,
     clearSelectedRowKeys,
   }: ActionType,
   emits: EmitType,
@@ -181,7 +181,7 @@ export function useDataSource(
 
       let params: Recordable = merge(
         pageParams,
-        useSearchForm ? getFieldsValue() : {},
+        useSearchForm ? getPathsValue() : {},
         searchInfo,
         opt?.searchInfo ?? {},
       );

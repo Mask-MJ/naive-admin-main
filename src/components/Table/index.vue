@@ -3,19 +3,30 @@
   import type { BasicTableProps, TableActionType } from './types';
   import Toolbars from './components/Toolbars.vue';
   import { basicProps } from './props';
-  import { useLoading, useDataSource, usePagination, useColumns, useRowSelection } from './hooks';
+  import {
+    useLoading,
+    useDataSource,
+    usePagination,
+    useColumns,
+    useRowSelection,
+    useTableForm,
+  } from './hooks';
 
-  const attrs = useAttrs();
+  import { useForm } from '@/components/Form';
+
+  const slots = useSlots();
+  // const attrs = useAttrs();
   const props = defineProps(basicProps);
   const emits = defineEmits(['change', 'register', 'fetch-success', 'fetch-error'] as string[]);
 
   const innerPropsRef = ref<Partial<BasicTableProps>>();
   const tableData = ref<Recordable[]>([]);
+  const [registerForm, formActions] = useForm();
 
-  // 集成表单搜索
-  const formActions = {
-    getFieldsValue: (): Recordable => [],
-  };
+  // // 集成表单搜索
+  // const formActions = {
+  //   getFieldsValue: (): Recordable => [],
+  // };
 
   // 表格 DOM 元素
   const tableElRef = ref<DataTableProps>();
@@ -29,18 +40,16 @@
 
   const getBindValues = computed(() => {
     return {
-      ...attrs,
       ...unref(getProps),
       data: getTableData(),
       loading: unref(getLoading),
-      rowKey: (tableData) => tableData[getRowKey.value],
+      rowKey: unref(getRowKey),
       columns: toRaw(unref(getViewColumns)),
       pagination: getPagination(),
       checkedRowKeys: getSelectedRowKeys(),
       onUpdateCheckedRowKeys: setSelectedRowKeys,
-    } as DataTableProps;
+    } as unknown as BasicTableProps;
   });
-
   // loading hooks
   const { getLoading, setLoading } = useLoading(getProps);
 
@@ -60,7 +69,7 @@
     getRawTableData,
     getRowKey,
     setTableData,
-    // fetch,
+    fetch,
     reload,
     updateTableData,
     updateTableDataRecord,
@@ -73,11 +82,22 @@
       getPagination,
       setPagination,
       setLoading,
-      getFieldsValue: formActions.getFieldsValue,
+      getPathsValue: formActions.getPathsValue,
       clearSelectedRowKeys,
     },
     emits,
   );
+  //页码切换
+  const updatePage = (page: number) => {
+    setPagination({ page: page });
+    reload();
+  };
+
+  //分页数量切换
+  const updatePageSize = (size: number) => {
+    setPagination({ page: 1, pageSize: size });
+    reload();
+  };
 
   function setProps(props: Partial<BasicTableProps>) {
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
@@ -89,6 +109,9 @@
     } else if (type === 'size') {
     }
   };
+
+  const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } =
+    useTableForm(getProps, slots, fetch, getLoading);
 
   const tableAction: TableActionType = {
     // 选择栏
@@ -125,28 +148,49 @@
 </script>
 
 <template>
-  <!-- 表格内容 card -->
-  <div class="basic-table">
-    <!-- 表格头部 操作按钮 -->
-    <div class="flex-between">
-      <div class="mt-2">
-        <slot name="toolbar" />
+  <div class="h-full">
+    <!-- 搜索表单 -->
+    <dark-mode-container
+      v-if="getBindValues.useSearchForm"
+      class="p-2"
+      :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''"
+    >
+      <Form
+        ref="formRef"
+        submit-on-reset
+        v-bind="getFormProps"
+        :show-action-button-group="true"
+        :is-auto-collapsed="true"
+        :table-action="tableAction"
+        @register="registerForm"
+        @submit="handleSearchInfoChange"
+      >
+        <template v-for="item in getFormSlotKeys" #[replaceFormSlotKey(item)]="data">
+          <slot :name="item" v-bind="data || {}"></slot>
+        </template>
+      </Form>
+    </dark-mode-container>
+    <!-- 表格内容 card -->
+    <dark-mode-container class="p-2" :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''">
+      <!-- 表格头部 操作按钮 -->
+      <div class="flex-between mb-2">
+        <div>
+          <slot name="toolbar" />
+        </div>
+        <Toolbars v-if="showToolbars" @table-action="toolbarsAction" />
       </div>
-      <Toolbars v-if="showToolbars" @table-action="toolbarsAction" />
-    </div>
-    <!-- 表格主体 -->
-    <n-data-table ref="tableElRef" v-bind="getBindValues">
-      <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
-        <slot :name="item" v-bind="data || {}"></slot>
-      </template>
-    </n-data-table>
+      <!-- 表格主体 -->
+      <n-data-table
+        ref="tableElRef"
+        v-bind="getBindValues"
+        @update:page="updatePage"
+        @update:page-size="updatePageSize"
+        @update:checked-row-keys="setSelectedRowKeys"
+      >
+        <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
+          <slot :name="item" v-bind="data || {}"></slot>
+        </template>
+      </n-data-table>
+    </dark-mode-container>
   </div>
-  <!-- 列设置 -->
-  <div> </div>
 </template>
-
-<style lang="scss" scoped>
-  .basic-table {
-    box-shadow: var(--n-box-shadow);
-  }
-</style>
