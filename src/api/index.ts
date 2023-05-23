@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios';
 import { clone, isString, merge } from 'lodash-es';
-import type { RequestOptions, ResPage, Result, ResultData } from './request/types';
+import type { RequestOptions, Result, ResultData } from './request/types';
 import type { AxiosTransform, CreateAxiosOptions } from './request/axiosTransform';
 import { VAxios } from './request/Axios';
 import { checkStatus } from './request/checkStatus';
@@ -50,7 +50,7 @@ const transform: AxiosTransform = {
     const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
     if (hasSuccess) {
       if (Reflect.has(data, 'data')) return (data as ResultData).data;
-      else if (Reflect.has(data, 'rows')) return (data as ResPage).rows;
+      // else if (Reflect.has(data, 'rows')) return (data as ResPage).rows;
       else return data;
     }
 
@@ -58,9 +58,9 @@ const transform: AxiosTransform = {
     switch (code) {
       case ResultEnum.TIMEOUT:
         timeoutMsg = t('api.timeoutMessage');
-        // const userStore = useUserStore()
-        // userStore.setToken()
-        // userStore.logout()
+        const userStore = useUserStore();
+        userStore.setToken();
+        userStore.logout();
         break;
       default:
         if (msg) timeoutMsg = msg;
