@@ -9,15 +9,13 @@ export {};
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    2: typeof import('./../src/components/Form/components/FormGrid copy 2.vue')['default'];
+    Action: typeof import('./../src/components/Table/components/Action.vue')['default'];
     AppLoading: typeof import('./../src/components/Common/AppLoading.vue')['default'];
-    copy: typeof import('./../src/components/Form/index copy.vue')['default'];
+    copy: typeof import('./../src/components/VxeTable/src/components/TableAction copy.vue')['default'];
     DarkModeContainer: typeof import('./../src/components/Common/DarkModeContainer.vue')['default'];
     DarkModeSwitch: typeof import('./../src/components/Common/DarkModeSwitch.vue')['default'];
     Form: typeof import('./../src/components/Form/index.vue')['default'];
-    Form2: typeof import('./../src/components/Form2/index.vue')['default'];
     FormAction: typeof import('./../src/components/Form/components/FormAction.vue')['default'];
-    FormGrid: typeof import('./../src/components/Form/components/FormGrid.vue')['default'];
     FormItemComponent: typeof import('./../src/components/Form/components/FormItemComponent.vue')['default'];
     HoverContainer: typeof import('./../src/components/Common/HoverContainer.vue')['default'];
     NaiveProvider: typeof import('./../src/components/Common/NaiveProvider.vue')['default'];
@@ -35,8 +33,6 @@ declare module '@vue/runtime-core' {
     NDynamicTags: typeof import('naive-ui')['NDynamicTags'];
     NForm: typeof import('naive-ui')['NForm'];
     NFormItem: typeof import('naive-ui')['NFormItem'];
-    NFormItemGi: typeof import('naive-ui')['NFormItemGi'];
-    NGi: typeof import('naive-ui')['NGi'];
     NGradientText: typeof import('naive-ui')['NGradientText'];
     NGrid: typeof import('naive-ui')['NGrid'];
     NGridItem: typeof import('naive-ui')['NGridItem'];
@@ -53,6 +49,7 @@ declare module '@vue/runtime-core' {
     NMessageProvider: typeof import('naive-ui')['NMessageProvider'];
     NModal: typeof import('naive-ui')['NModal'];
     NNotificationProvider: typeof import('naive-ui')['NNotificationProvider'];
+    NPopconfirm: typeof import('naive-ui')['NPopconfirm'];
     NScrollbar: typeof import('naive-ui')['NScrollbar'];
     NSelect: typeof import('naive-ui')['NSelect'];
     NSpace: typeof import('naive-ui')['NSpace'];
@@ -63,6 +60,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink'];
     RouterView: typeof import('vue-router')['RouterView'];
     Table: typeof import('./../src/components/Table/index.vue')['default'];
+    TableAction: typeof import('./../src/components/VxeTable/src/components/TableAction.vue')['default'];
+    TableAction2: typeof import('./../src/components/Table/components/TableAction2.vue')['default'];
     Toolbars: typeof import('./../src/components/Table/components/Toolbars.vue')['default'];
   }
 }

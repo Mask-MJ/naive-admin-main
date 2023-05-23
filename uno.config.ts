@@ -59,8 +59,9 @@ export default defineConfig({
       error_hover: 'rgb(var(--error-color-hover))',
       error_pressed: 'rgb(var(--error-color-pressed))',
       error_active: 'rgb(var(--error-color-active),0.1)',
+      tableColor: '#fff',
       dark: '#18181c',
     },
   },
-  safelist: [...'prose prose-sm m-auto text-left'.split(' '), ...IconNames],
+  safelist: [...'prose prose-sm m-auto text-left'.split(' '), ...IconNames, '!pr-0', 'mr-2'],
 });

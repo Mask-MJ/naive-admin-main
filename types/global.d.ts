@@ -1,4 +1,4 @@
-type Fn = (...arg: any) => any;
+// type Fn = (...arg: any) => any;
 declare type Nullable<T> = T | null;
 declare type Recordable<T = any> = Record<string, T>;
 declare type TimeoutHandle = ReturnType<typeof setTimeout>;
