@@ -91,7 +91,7 @@ export interface BasicFormProps extends FormProps {
   /** 表单子选项配置 */
   formItem: FormItemGiProps;
   // 表单操作栏配置
-  formAction: FormAction;
+  formAction: Partial<FormAction>;
 }
 
 // 表单操作事件

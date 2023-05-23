@@ -105,7 +105,7 @@
   /** 按下回车键提交表单 */
   const handleEnterPress = (e: KeyboardEvent) => {
     const { formAction } = unref(getProps);
-    if (!formAction.submitButtonOptions.autoSubmitOnEnter) return;
+    if (!formAction!.submitButtonOptions!.autoSubmitOnEnter) return;
     if (e.key === 'Enter' && e.target && e.target instanceof HTMLElement) {
       const target: HTMLElement = e.target as HTMLElement;
       if (target && target.tagName && target.tagName.toUpperCase() == 'INPUT') {

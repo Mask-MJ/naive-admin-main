@@ -139,5 +139,5 @@
 </script>
 
 <template>
-  <RenderComponent></RenderComponent>
+  <RenderComponent class="w-full"></RenderComponent>
 </template>

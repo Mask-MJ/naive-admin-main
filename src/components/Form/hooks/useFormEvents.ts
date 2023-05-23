@@ -36,8 +36,8 @@ export function useFormEvents({
 }: UseFormActionContext) {
   // 重置表单值
   const resetPaths = async () => {
-    const resetFunc = getProps.value.formAction.resetButtonOptions.resetFunc;
-    const submitOnReset = getProps.value.formAction.submitButtonOptions.submitOnReset;
+    const resetFunc = getProps.value.formAction!.resetButtonOptions!.resetFunc;
+    const submitOnReset = getProps.value.formAction!.submitButtonOptions!.submitOnReset;
     // 如果有自定义重置函数 执行自定义重置函数
     resetFunc && isFunction(resetFunc) && (await resetFunc());
     // 遍历 formModel 把值置为 defaultValue 或 ''
@@ -56,7 +56,7 @@ export function useFormEvents({
   // 表单提交
   const handleSubmit = async (e?: Event): Promise<void> => {
     e && e.preventDefault();
-    const submitFunc = getProps.value.formAction.submitButtonOptions.submitFunc;
+    const submitFunc = getProps.value.formAction!.submitButtonOptions!.submitFunc;
     // 如果有自定义提交函数 执行自定义提交函数
     if (submitFunc && isFunction(submitFunc)) {
       await submitFunc();

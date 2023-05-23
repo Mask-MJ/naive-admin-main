@@ -1,5 +1,5 @@
 import type { Ref, ComputedRef } from 'vue';
-import type { BasicFormProps, FormSchema } from '../types/form';
+import type { BasicFormProps, FormSchema } from '../types';
 import { unref } from 'vue';
 import {
   isUndefined,
