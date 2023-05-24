@@ -114,7 +114,12 @@
     }
   };
   // 获取绑定到 form-item-gi 上的值
-  const getBindItemValue = (item: FormSchema) => merge(getProps.value.formItem, item);
+  const getBindItemValue = (item: FormSchema) => {
+    if (item.required && !item.rule) {
+      item.rule = { required: true, message: `${item.label}为必填项` };
+    }
+    return { ...(getProps.value.formItem as any), ...item };
+  };
   // 判断组件是否展示
   function getShow(item: FormSchema): { isShow: boolean; isIfShow: boolean } {
     const { show, ifShow } = item;
@@ -241,22 +246,19 @@
     @keypress.enter="handleEnterPress"
   >
     <n-grid v-bind="getBindGridValue">
-      <NFormItemGi
-        v-for="item in schemas"
-        v-show="getShow(item).isShow"
-        :key="item.path"
-        v-bind="getBindItemValue(item)"
-      >
-        <FormItemComponent
-          :schema="item"
-          v-bind="getBindComponentValue"
-          @path-value-change="setFormModel"
-        >
-          <template v-for="item in Object.keys($slots)" #[item]="data">
-            <slot :name="item" v-bind="data || {}"></slot>
-          </template>
-        </FormItemComponent>
-      </NFormItemGi>
+      <template v-for="item in schemas" :key="item.path">
+        <NFormItemGi v-show="getShow(item).isShow" v-bind="{ ...getBindItemValue(item) }">
+          <FormItemComponent
+            :schema="item"
+            v-bind="getBindComponentValue"
+            @path-value-change="setFormModel"
+          >
+            <template v-for="item in Object.keys($slots)" #[item]="data">
+              <slot :name="item" v-bind="data || {}"></slot>
+            </template>
+          </FormItemComponent>
+        </NFormItemGi>
+      </template>
       <NFormItemGi v-if="getProps.formAction.show" suffix v-bind="getProps.formAction.actionGi">
         <FormAction v-bind="getBindActionValue" @action="action" />
       </NFormItemGi>

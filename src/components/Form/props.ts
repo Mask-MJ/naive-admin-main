@@ -1,11 +1,13 @@
 import type { GridProps, FormItemGiProps } from 'naive-ui';
 import type { LabelPlacement, LabelAlign } from 'naive-ui/es/form/src/interface';
 import type { FormSchema, PathMapToTime, FormAction } from './types';
+import { formProps } from 'naive-ui';
 
 import { PropType } from 'vue';
 
 // 表单配置
 export const basicProps = {
+  ...formProps,
   /** 自动设置 placeholder */
   autoSetPlaceHolder: { type: Boolean, default: true },
   /** 表单配置规则 */
@@ -24,7 +26,7 @@ export const basicProps = {
   /** 标签的文本对齐方式 */
   labelAlign: { type: String as PropType<LabelAlign>, default: 'right' },
   /** 必填项是否展示星号 */
-  showRequireMark: { type: Boolean, default: true },
+  // showRequireMark: { type: Boolean, default: true },
   /** 表格方法选项 */
   // tableAction: { type: Object as PropType<TableActionType> },
   /** 表单布局方式 */
