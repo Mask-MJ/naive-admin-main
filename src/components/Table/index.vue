@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { DataTableProps } from 'naive-ui';
-  import type { BasicTableProps, TableActionType } from './types';
+  import type { BasicTableProps, TableActionType, TableSize } from './types';
   import Toolbars from './components/Toolbars.vue';
   import { basicProps } from './props';
   import {
@@ -37,7 +37,6 @@
   // }, 3000);
 
   const getProps = computed(() => ({ ...props, ...unref(innerPropsRef) } as BasicTableProps));
-
   const getBindValues = computed(() => {
     return {
       ...unref(getProps),
@@ -103,10 +102,13 @@
     innerPropsRef.value = { ...unref(innerPropsRef), ...props };
   }
 
-  const toolbarsAction = (type: string) => {
-    if (type === 'reload') {
-    } else if (type === 'striped') {
-    } else if (type === 'size') {
+  const toolbarsAction = (data: { type: string; value: string }) => {
+    if (data.type === 'reload') {
+      reload();
+    } else if (data.type === 'striped') {
+      setProps({ striped: data.value === 'true' ? true : false });
+    } else if (data.type === 'size') {
+      setProps({ size: data.value as TableSize });
     }
   };
 
@@ -148,7 +150,7 @@
 </script>
 
 <template>
-  <div class="h-full">
+  <div class="h-full flex flex-col">
     <!-- 搜索表单 -->
     <dark-mode-container
       v-if="getBindValues.useSearchForm"
@@ -171,17 +173,21 @@
       </Form>
     </dark-mode-container>
     <!-- 表格内容 card -->
-    <dark-mode-container class="p-2" :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''">
+    <dark-mode-container
+      class="p-2 flex-1"
+      :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''"
+    >
       <!-- 表格头部 操作按钮 -->
       <div class="flex-between mb-2">
         <div>
           <slot name="toolbar" />
         </div>
-        <Toolbars v-if="showToolbars" @table-action="toolbarsAction" />
+        <Toolbars v-if="showToolbars" v-bind="getProps" @table-action="toolbarsAction" />
       </div>
       <!-- 表格主体 -->
       <n-data-table
         ref="tableElRef"
+        class="n-data-table"
         v-bind="getBindValues"
         @update:page="updatePage"
         @update:page-size="updatePageSize"
@@ -194,3 +200,9 @@
     </dark-mode-container>
   </div>
 </template>
+
+<style lang="scss" scoped>
+  .n-data-table {
+    height: calc(100% - 48px);
+  }
+</style>

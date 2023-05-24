@@ -72,7 +72,7 @@
 
   const renderButton = (action: ActionItem) => {
     const { icon, label, buttonProps } = action;
-    return h(NButton, buttonProps, () => [
+    return h(NButton, { size: 'small', ...buttonProps }, () => [
       icon && h('i', { class: [icon, !!label && 'mr-1'] }),
       label && h('span', label),
     ]);

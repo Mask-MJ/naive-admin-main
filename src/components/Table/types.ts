@@ -11,6 +11,8 @@ import type { RowKey, RowData, OnUpdateCheckedRowKeys } from 'naive-ui/es/data-t
 // import type { Size } from 'naive-ui/es/button/src/interface';
 import type { BasicFormProps } from '@/components/Form';
 
+export type TableSize = 'small' | 'medium' | 'large';
+
 // 扩展 column
 export type BasicColumn<T = any> = DataTableColumn<T> & {
   key: String;

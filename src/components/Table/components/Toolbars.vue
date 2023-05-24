@@ -7,12 +7,13 @@
     size: { type: String },
   });
 
-  const isStriped = computed(() => String(props.striped));
+  const tableStriped = computed(() => String(props.striped));
+  const tableSize = computed(() => props.size);
   const reload = () => emits('tableAction', { type: 'reload' });
-  const stripedSelect = (e: any) => {
-    emits('tableAction', { type: 'striped', value: Boolean(e) });
+  const stripedSelect = (e: boolean) => {
+    emits('tableAction', { type: 'striped', value: e });
   };
-  const densitySelect = (e: any) => {
+  const densitySelect = (e: string) => {
     emits('tableAction', { type: 'size', value: e });
   };
 </script>
@@ -34,7 +35,7 @@
       <template #trigger>
         <div class="cursor-pointer">
           <n-dropdown
-            :value="isStriped"
+            :value="tableStriped"
             trigger="click"
             :options="ACTION_SETTINGS.STRIPED"
             @select="stripedSelect"
@@ -51,7 +52,7 @@
       <template #trigger>
         <div class="cursor-pointer">
           <n-dropdown
-            :value="size"
+            :value="tableSize"
             trigger="click"
             :options="ACTION_SETTINGS.DENSITY"
             @select="densitySelect"

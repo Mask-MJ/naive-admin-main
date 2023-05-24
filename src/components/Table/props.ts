@@ -12,8 +12,12 @@ export const basicProps = {
   striped: { type: Boolean, default: true },
   singleLine: { type: Boolean, default: false },
   remote: { type: Boolean, default: true },
-  tableLayout: { type: String, default: 'fixed' },
   size: { type: String, default: 'small' },
+  flexHeight: { type: Boolean, default: true },
+  pagination: {
+    type: [Boolean, Object],
+    default: () => ({ pageSize: 10, pageSizes: [10, 20, 30, 40, 50] }),
+  },
   // scrollX: { type: Number, default: 1800 },
   // 扩展
   // 请求接口
