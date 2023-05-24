@@ -1,13 +1,11 @@
 <script setup lang="tsx">
-  import type { ComponentType } from '../component';
   import type { FormSchema, FormActionType } from '../types';
   import { upperFirst, isFunction } from 'lodash-es';
   import { getSlot } from '@/utils';
-
+  import { createPlaceholderMessage } from '../helper';
   import { componentMap } from '../componentMap';
 
   const slots = useSlots();
-  const { t } = useI18n();
   const emits = defineEmits(['pathValueChange']);
   const props = defineProps({
     schema: { type: Object as PropType<FormSchema>, required: true },
@@ -110,26 +108,6 @@
 
     return { ...propsData, ...on, ...bindValue };
   });
-
-  // 生成placeholder
-  function createPlaceholderMessage(component: ComponentType, type?: string) {
-    if (['NInput', 'Complete'].includes(component)) {
-      return t('components.form.inputText');
-    }
-    if (['NSelect', 'NCascader', 'NCheckbox', 'NRadioGroup', 'NSwitch'].includes(component)) {
-      return t('components.form.chooseText');
-    }
-    if (['NDatePicker'].includes(component)) {
-      if (type === 'start') {
-        return t('components.form.startTime');
-      } else if (type === 'end') {
-        return t('components.form.endTime');
-      } else {
-        return t('components.form.chooseText');
-      }
-    }
-    return '';
-  }
 
   const Comp = componentMap.get(props.schema.component) as ReturnType<typeof defineComponent>;
   const compSlot = isFunction(props.schema.renderComponentContent)

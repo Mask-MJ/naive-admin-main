@@ -4,6 +4,7 @@
   import { basicProps } from './props';
   import { useFormEvents } from './hooks/useFormEvents';
   import { useFormValues } from './hooks/useFormValues';
+  import { createFormItemRule } from './helper';
 
   import { NFormItemGi } from 'naive-ui';
   import { isFunction, isBoolean, merge } from 'lodash-es';
@@ -115,10 +116,7 @@
   };
   // 获取绑定到 form-item-gi 上的值
   const getBindItemValue = (item: FormSchema) => {
-    if (item.required && !item.rule) {
-      item.rule = { required: true, message: `${item.label}为必填项` };
-    }
-    return { ...(getProps.value.formItem as any), ...item };
+    return { ...(getProps.value.formItem as any), ...createFormItemRule(item) };
   };
   // 判断组件是否展示
   function getShow(item: FormSchema): { isShow: boolean; isIfShow: boolean } {
@@ -247,7 +245,7 @@
   >
     <n-grid v-bind="getBindGridValue">
       <template v-for="item in schemas" :key="item.path">
-        <NFormItemGi v-show="getShow(item).isShow" v-bind="{ ...getBindItemValue(item) }">
+        <NFormItemGi v-show="getShow(item).isShow" v-bind="getBindItemValue(item)">
           <FormItemComponent
             :schema="item"
             v-bind="getBindComponentValue"
