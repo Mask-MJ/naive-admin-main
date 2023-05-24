@@ -50,17 +50,26 @@
   // 获取需要绑定到组件上的值
   const getBindComponentValue = computed(() => {
     const { formModel } = props;
-    const { path, component, changeEvent = 'update:value' } = props.schema;
+    const { path, component, changeEvent } = props.schema;
     const isCheck = component && ['NSwitch', 'NCheckbox'].includes(component);
     const isTree = component && ['ApiTree', 'NTree'].includes(component);
     const isDate = component && ['NDatePicker'].includes(component);
 
-    const eventKey = `on${upperFirst(changeEvent)}`;
+    // const eventKey = `on${upperFirst(changeEvent)}`;
+    const eventKey = computed(() => {
+      if (changeEvent) {
+        return `on${upperFirst(changeEvent)}`;
+      } else if (isTree) {
+        return 'onUpdateCheckedKeys';
+      } else {
+        return 'onUpdate:value';
+      }
+    });
     const on = {
-      [eventKey]: (...args: Nullable<Recordable<any>>[]) => {
+      [unref(eventKey)]: (...args: Nullable<Recordable<any>>[]) => {
         const [e] = args;
-        if (propsData[eventKey]) {
-          propsData[eventKey](...args);
+        if (propsData[unref(eventKey)]) {
+          propsData[unref(eventKey)](...args);
         }
         const target = e ? e.target : null;
         const value = target ? (isCheck ? target.checked : target.value) : e;
