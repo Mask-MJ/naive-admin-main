@@ -33,7 +33,7 @@ export const useRouterStore = defineStore('router-store', {
       // 多语言文件是异步加载, 监听加载完成再调用
       watchEffect(() => {
         Object.keys(i18n.global.messages.value).length &&
-          window.$message.loading(t('app.menuLoading'));
+          window.$message.loading(t('app.menuLoading'), { duration: 1500 });
       });
       // 获取后台路由
       const routeList = await getMenuList();
