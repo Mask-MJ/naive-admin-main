@@ -98,7 +98,7 @@ export interface BasicFormProps extends FormProps {
 export interface FormActionType extends FormInst {
   submit: (e?: Event | undefined) => Promise<void>; // 提交表单
   resetPaths: () => Promise<void>; // 重置表单值
-  getPathsValue: () => Recordable; // 获取表单值
+  getPathsValue: () => any; // 获取表单值
   setPathsValue: (values: Record<string, any>) => Promise<void>; // 设置表单字段值
   updateSchema: (data: Partial<FormSchema> | Partial<FormSchema>[]) => Promise<void>; // 更新表单的 schema, 只更新函数所传的参数
   resetSchema: (data: Partial<FormSchema> | Partial<FormSchema>[]) => Promise<void>; // 重置表单 schema

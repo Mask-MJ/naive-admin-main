@@ -38,7 +38,7 @@ export const basicProps = {
       /** 当开启折叠时,超过 3 行折叠 */
       collapsedRows: 3,
       /** 横向间隔槽 */
-      xGap: 24,
+      xGap: 0,
       /** 纵向间隔槽 */
       yGap: 0,
     }),
@@ -58,7 +58,7 @@ export const basicProps = {
     type: Object as PropType<Partial<FormAction>>,
     default: () => ({
       /** 是否显示操作按钮组 */
-      show: true,
+      show: false,
       /** 操作按钮组栅格配置 */
       actionGi: { span: 8 },
       /** 重置按钮属性 */
