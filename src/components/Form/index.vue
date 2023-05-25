@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { BasicFormProps, FormSchema, FormActionType } from './types';
+  import type { BasicFormProps, FormSchema, FormActionType, FormAction } from './types';
 
   import { basicProps } from './props';
   import { useFormEvents } from './hooks/useFormEvents';
@@ -11,7 +11,7 @@
   import { dateUtil } from '@/utils';
 
   import FormItemComponent from './components/FormItemComponent.vue';
-  import FormAction from './components/FormAction.vue';
+  import FormActionComp from './components/FormAction.vue';
 
   const attrs = useAttrs();
   const props = defineProps(basicProps);
@@ -159,14 +159,11 @@
   // 获取需要绑定到操作栏上的值
   const getBindActionValue = computed(() => {
     const { formAction, formGrid, formItem } = getProps.value;
-    const { showAdvancedButton, resetButtonOptions, submitButtonOptions } = formAction;
     return {
       schemas: schemas.value,
       formGrid,
       formItem,
-      showAdvancedButton,
-      resetButtonOptions,
-      submitButtonOptions,
+      formAction: formAction as FormAction,
     };
   });
 
@@ -258,7 +255,7 @@
         </NFormItemGi>
       </template>
       <NFormItemGi v-if="getProps.formAction.show" suffix v-bind="getProps.formAction.actionGi">
-        <FormAction v-bind="getBindActionValue" @action="action" />
+        <FormActionComp v-bind="getBindActionValue" @action="action" />
       </NFormItemGi>
     </n-grid>
   </n-form>
