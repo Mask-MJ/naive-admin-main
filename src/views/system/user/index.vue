@@ -23,10 +23,10 @@
     formConfig: { labelWidth: 100, schemas },
     searchInfo,
     bordered: true,
+    scrollX: 800,
     actionColumn: {
       width: 200,
-      title: '操作',
-      flag: 'ACTION',
+      fixed: 'right',
       key: 'ACTION',
       render: (row: AccountList) =>
         h(Action, {
@@ -96,7 +96,7 @@
 </script>
 
 <template>
-  <div class="flex">
+  <div class="flex h-full">
     <div class="w-1/4 xl:w-1/5 mr-4">
       <n-input v-model:value="searchValue" placeholder="搜索" />
       <n-tree
