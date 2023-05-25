@@ -30,11 +30,10 @@ export function createFormItemRule(schemas: FormSchema) {
     const rule: FormItemRule = { required: true, message: `${schemas.label}为必填项` };
     if (['NInput', 'NAutoComplete'].includes(schemas.component)) {
       rule.trigger = ['blur', 'input'];
-    } else if (
-      ['ApiSelect', 'ApiTree', 'NSelect', 'NTreeSelect', 'NCheckbox', 'NCheckboxGroup'].includes(
-        schemas.component,
-      )
-    ) {
+    } else if (['ApiSelect', 'ApiTree', 'NTreeSelect'].includes(schemas.component)) {
+      rule.type = 'array';
+      rule.trigger = ['blur', 'change'];
+    } else if (['NCheckbox', 'NCheckboxGroup'].includes(schemas.component)) {
       rule.type = 'array';
       rule.trigger = ['blur', 'change'];
     } else if (['NInputNumber'].includes(schemas.component)) {

@@ -51,7 +51,7 @@
     const { path, component, changeEvent } = props.schema;
     const isCheck = component && ['NSwitch', 'NCheckbox'].includes(component);
     const isTree = component && ['ApiTree', 'NTree'].includes(component);
-    const isDate = component && ['NDatePicker'].includes(component);
+    // const isDate = component && ['NDatePicker'].includes(component);
 
     // const eventKey = `on${upperFirst(changeEvent)}`;
     const eventKey = computed(() => {
@@ -94,13 +94,7 @@
     }
     propsData.formValues = getValues.value;
 
-    const value = isCheck
-      ? 'checked'
-      : isTree
-      ? 'checkedKeys'
-      : isDate
-      ? 'update:formatted-value'
-      : 'value';
+    const value = isCheck ? 'checked' : isTree ? 'checkedKeys' : 'value';
 
     const bindValue = {
       [value]: formModel[path],

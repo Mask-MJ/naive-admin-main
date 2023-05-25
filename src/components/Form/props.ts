@@ -66,7 +66,7 @@ export const basicProps = {
       /** 重置按钮属性 */
       resetButtonOptions: { show: true, label: '重置' },
       /** 提交按钮属性 */
-      submitButtonOptions: { show: true, label: '提交' },
+      submitButtonOptions: { show: true, label: '提交', submitOnReset: true },
       /** 当开启折叠时,是否显示收起展开按钮 */
       showAdvancedButton: true,
     }),
