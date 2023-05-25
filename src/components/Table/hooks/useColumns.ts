@@ -76,8 +76,7 @@ function handleActionColumn(propsRef: ComputedRef<BasicTableProps>, columns: Bas
   if (hasIndex === -1) {
     columns.push({
       title: '操作',
-      ...columns[hasIndex],
-      // fixed: 'right',
+      fixed: 'right',
       ...actionColumn,
       flag: 'ACTION',
     } as BasicColumn);

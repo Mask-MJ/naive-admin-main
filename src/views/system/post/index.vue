@@ -16,7 +16,6 @@
     rowKey: (rowData) => rowData.roleId,
     actionColumn: {
       width: 150,
-      fixed: 'right',
       key: 'ACTION',
       render: (row: PostList) =>
         h(Action, {

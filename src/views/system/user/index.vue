@@ -25,7 +25,6 @@
     bordered: true,
     actionColumn: {
       width: 200,
-      fixed: 'right',
       key: 'ACTION',
       render: (row: AccountList) =>
         h(Action, {
