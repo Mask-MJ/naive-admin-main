@@ -199,5 +199,6 @@
 <style lang="scss" scoped>
   .n-data-table {
     height: calc(100% - 48px);
+    min-height: 300px;
   }
 </style>
