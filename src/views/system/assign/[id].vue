@@ -23,8 +23,6 @@
     searchInfo: { roleId: props.id },
     actionColumn: {
       width: 100,
-      title: '操作',
-      flag: 'ACTION',
       key: 'ACTION',
       render: (row) =>
         h(Action, {
