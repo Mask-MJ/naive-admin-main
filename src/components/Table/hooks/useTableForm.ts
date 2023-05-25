@@ -24,7 +24,7 @@ export function useTableForm(
         /** 当开启折叠时,是否显示收起展开按钮 */
         showAdvancedButton: true,
       },
-      formGrid: { collapsed: true, collapsedRows: 2 },
+      formGrid: { cols: 24, collapsed: true, collapsedRows: 2 },
       ...formConfig,
     };
   });

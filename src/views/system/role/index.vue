@@ -18,7 +18,6 @@
     useSearchForm: true,
     formConfig: { labelWidth: 100, schemas },
     rowKey: (rowData) => rowData.roleId,
-    scrollX: 1200,
     actionColumn: {
       width: 200,
       fixed: 'right',
@@ -57,7 +56,7 @@
               },
             },
             {
-              icon: 'i-ant-design:delete-outlined',
+              icon: 'i-carbon:delete',
               tooltipProps: { content: '删除' },
               buttonProps: { type: 'error' },
               popConfirmProps: {

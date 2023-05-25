@@ -23,24 +23,19 @@
   const tableData = ref<Recordable[]>([]);
   const [registerForm, formActions] = useForm();
 
-  // // 集成表单搜索
-  // const formActions = {
-  //   getFieldsValue: (): Recordable => [],
-  // };
-
   // 表格 DOM 元素
   const tableElRef = ref<DataTableProps>();
 
-  // setTimeout(() => {
-  // console.log(tableElRef.value);
-  // tableElRef.value?.doCheckAll(true);
-  // }, 3000);
-
   const getProps = computed(() => ({ ...props, ...unref(innerPropsRef) } as BasicTableProps));
+  const getScrollX = computed(() => {
+    const { scrollX } = unref(getProps);
+    return scrollX || getColumnsRef.value.reduce((pre, next) => pre + Number(next.width || 0), 0);
+  });
   const getBindValues = computed(() => {
     return {
       ...unref(getProps),
       data: getTableData(),
+      scrollX: unref(getScrollX),
       loading: unref(getLoading),
       rowKey: unref(getRowKey),
       columns: toRaw(unref(getViewColumns)),
@@ -55,7 +50,7 @@
   // pagination hooks
   const { getPagination, setPagination } = usePagination(getProps);
   // columns hooks
-  const { getViewColumns, getColumns, setColumns, getCacheColumns } = useColumns(
+  const { getViewColumns, getColumnsRef, getColumns, setColumns, getCacheColumns } = useColumns(
     getProps,
     getPagination,
   );
@@ -154,7 +149,7 @@
     <!-- 搜索表单 -->
     <dark-mode-container
       v-if="getBindValues.useSearchForm"
-      class="p-2"
+      class="p-4 pb-0"
       :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''"
     >
       <Form
@@ -174,7 +169,7 @@
     </dark-mode-container>
     <!-- 表格内容 card -->
     <dark-mode-container
-      class="p-2 flex-1"
+      class="p-4 flex-1"
       :class="getProps.outermost ? 'rounded-lg shadow-xl mb-4' : ''"
     >
       <!-- 表格头部 操作按钮 -->

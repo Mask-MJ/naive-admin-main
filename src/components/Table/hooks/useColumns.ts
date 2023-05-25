@@ -201,6 +201,7 @@ export function useColumns(
 
   return {
     getViewColumns,
+    getColumnsRef,
     getColumns,
     setColumns,
     getCacheColumns,

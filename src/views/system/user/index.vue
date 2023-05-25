@@ -23,7 +23,6 @@
     formConfig: { labelWidth: 100, schemas },
     searchInfo,
     bordered: true,
-    scrollX: 800,
     actionColumn: {
       width: 200,
       fixed: 'right',
@@ -62,7 +61,7 @@
               },
             },
             {
-              icon: 'i-ant-design:delete-outlined',
+              icon: 'i-carbon:delete',
               tooltipProps: { content: '删除' },
               buttonProps: { type: 'error' },
               popConfirmProps: {
