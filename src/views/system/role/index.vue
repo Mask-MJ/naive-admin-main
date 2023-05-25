@@ -1,43 +1,88 @@
 <script setup lang="ts">
-  import Table from '@/components/Table/index.vue';
-  import { BasicColumn } from '@/components/Table/types';
-  import { schemas } from './data';
-  import { useForm } from '@/components/Form/hooks/useForm';
+  import type { RoleList } from '@/api/modules/system/types/role';
 
-  const columns: BasicColumn[] = [
-    { type: 'selection' },
-    { title: 'Name', key: 'name' },
-    { title: 'Age', key: 'age' },
-    { title: 'Address', key: 'address' },
-  ];
-  const data = [
-    { id: 0, name: 'John Brown', age: 32, address: 'New York No. 1 Lake Park' },
-    { id: 1, name: 'Jim Green', age: 42, address: 'London No. 1 Lake Park' },
-    { id: 2, name: 'Joe Black', age: 32, address: 'Sidney No. 1 Lake Park' },
-  ];
+  import { schemas, columns } from './data';
+  import { useTable, Action } from '@/components/Table';
+  import { getRoleList, deleteUser } from '@/api/modules/system/role';
+  import { useModal } from '@/components/Modal';
+  import setModal from './modal/setModal.vue';
+  import depModal from './modal/depModal.vue';
 
-  const [registerForm] = useForm({
-    labelWidth: 80,
-    schemas: schemas,
+  const router = useRouter();
+
+  const [registerSetModal, { openModal: openSetModel }] = useModal();
+  const [registerDepModal, { openModal: openDepModel }] = useModal();
+  const [registerTable, { reload }] = useTable({
+    api: getRoleList,
+    columns,
+    useSearchForm: true,
+    formConfig: { labelWidth: 100, schemas },
+    rowKey: (rowData) => rowData.roleId,
+    scrollX: 1200,
+    actionColumn: {
+      width: 200,
+      fixed: 'right',
+      key: 'ACTION',
+      render: (row: RoleList) =>
+        h(Action, {
+          actions: [
+            {
+              icon: 'i-carbon:edit',
+              tooltipProps: { content: '编辑' },
+              buttonProps: {
+                type: 'primary',
+                onClick: () => {
+                  openSetModel(true, { roleId: row.roleId });
+                },
+              },
+            },
+            {
+              icon: 'i-carbon:user-admin',
+              tooltipProps: { content: '分配' },
+              buttonProps: {
+                type: 'warning',
+                onClick: () => {
+                  router.push(`/system/assign/${encodeURIComponent(row.roleId)}`);
+                },
+              },
+            },
+            {
+              icon: 'i-ant-design:poweroff-outlined',
+              tooltipProps: { content: '权限' },
+              buttonProps: {
+                type: 'success',
+                onClick: () => {
+                  openDepModel(true, { roleId: row.roleId });
+                },
+              },
+            },
+            {
+              icon: 'i-ant-design:delete-outlined',
+              tooltipProps: { content: '删除' },
+              buttonProps: { type: 'error' },
+              popConfirmProps: {
+                content: '是否确认删除',
+                onPositiveClick: async () => {
+                  await deleteUser(row.roleId);
+                  window.$message.success('删除成功');
+                  await reload();
+                },
+              },
+            },
+          ],
+        }),
+    },
   });
 </script>
 
 <template>
-  <div>
-    <Form @register="registerForm">
-      <template #ids="{ model, path }">
-        <n-input v-model:value="model[path]">
-          <template #prefix> asd </template>
-        </n-input>
-      </template>
-    </Form>
-    <Table :columns="columns" :data="data" :bordered="false" />
-  </div>
+  <Table @register="registerTable">
+    <template #toolbar>
+      <n-button type="primary" @click="openSetModel(true)">新增</n-button>
+    </template>
+  </Table>
+  <setModal @register="registerSetModal" @success="reload()" />
+  <depModal @register="registerDepModal" @success="reload()" />
 </template>
 
 <style scoped></style>
-
-<route lang="yaml">
-# meta:
-# layout: users
-</route>
