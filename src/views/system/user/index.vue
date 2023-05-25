@@ -1,125 +1,123 @@
 <script setup lang="ts">
-  import { VueDraggable } from 'vue-draggable-plus';
-  import { componentMap, data } from './data';
-  import { SortableEvent } from 'sortablejs';
-  import { remove, find } from 'lodash-es';
-  import Drawer from './components/Drawer.vue';
+  import type { AccountList } from '@/api/modules/system/types/user';
 
-  // 原始组件数据
-  const list = ref(data);
-  // 构建的数据
-  const tags = ref<{ label: string; value: any }[]>([{ label: '仪表盘', value: [] }]);
-  // 当前激活的tab页
-  const tabActive = ref(0);
-  // 当前列表的选中项
-  const listActive = ref();
-  const getActiveData = computed(() => {
-    return unref(tags)[unref(tabActive)].value[unref(listActive)];
+  import { Action, useTable } from '@/components/Table';
+  import { useModal } from '@/components/Modal';
+  import { columns, schemas } from './data';
+  import { getDeptList, getAccountList, deleteUser } from '@/api/modules/system/user';
+  import AccountModal from './modal/AccountModal.vue';
+  import ResetModal from './modal/ResetModal.vue';
+
+  const searchValue = ref('');
+  const searchInfo = reactive<Recordable>({});
+  const data = ref();
+
+  const router = useRouter();
+  const [registerSetModal, { openModal: openSetModel }] = useModal();
+  const [registerResetModal, { openModal: openResetModel }] = useModal();
+
+  const [registerTable, { reload }] = useTable({
+    api: getAccountList,
+    columns,
+    useSearchForm: true,
+    formConfig: { labelWidth: 100, schemas },
+    searchInfo,
+    bordered: true,
+    actionColumn: {
+      width: 200,
+      title: '操作',
+      flag: 'ACTION',
+      key: 'ACTION',
+      render: (row: AccountList) =>
+        h(Action, {
+          actions: [
+            {
+              icon: 'i-carbon:edit',
+              tooltipProps: { content: '编辑' },
+              buttonProps: {
+                type: 'primary',
+                onClick: () => {
+                  openSetModel(true, { userId: row.userId, treeData: data.value });
+                },
+              },
+            },
+            {
+              icon: 'i-ant-design:user-outlined',
+              tooltipProps: { content: '分配角色' },
+              buttonProps: {
+                type: 'warning',
+                onClick: () => {
+                  router.push(`/system/distribution/${row.userId}`);
+                },
+              },
+            },
+            {
+              icon: 'i-carbon:ibm-cloud-key-protect',
+              tooltipProps: { content: '重置密码' },
+              buttonProps: {
+                type: 'success',
+                onClick: () => {
+                  openResetModel(true, { userId: row.userId });
+                },
+              },
+            },
+            {
+              icon: 'i-ant-design:delete-outlined',
+              tooltipProps: { content: '删除' },
+              buttonProps: { type: 'error' },
+              popConfirmProps: {
+                content: '是否确认删除',
+                onPositiveClick: async () => {
+                  await deleteUser(row.userId);
+                  window.$message.success('删除成功');
+                  await reload();
+                },
+              },
+            },
+          ],
+        }),
+    },
+    rowKey: (rowData) => rowData.userId,
   });
-  // 添加 tabs
-  const handleAdd = (e: SortableEvent) => {
-    unref(tags)[unref(tabActive)].value[e.newIndex ?? 0].id = Math.random()
-      .toString(36)
-      .substring(2);
+
+  const handleAdd = () => {
+    openSetModel(true, { treeData: data.value });
   };
-  const onCreate = (label: string) => ({ label, value: [] } as any);
-  // 标记选中
-  const active = (index: number | null) => {
-    listActive.value = index;
+
+  /** 更新表格数据 */
+  const handleSelect = (deptId: string[]) => {
+    searchInfo.deptId = deptId[0];
+    reload();
   };
-  const listClass = (index: number, size: string) => {
-    return {
-      'outline outline-gray-400': listActive.value === index,
-      'w-48% h-160px': size === 'small',
-      'w-full h-320px': size === 'large',
-    };
-  };
-  // 删除选中项
-  const removeList = (id: string) => {
-    listActive.value = null;
-    remove(unref(tags)[unref(tabActive)].value, (n: any) => n.id === id);
-  };
-  const upData = (data: any) => {
-    let listData = find(unref(tags)[unref(tabActive)].value, { id: data.id });
-    listData && (listData = data);
-  };
+
+  onMounted(async () => {
+    data.value = await getDeptList('0');
+  });
 </script>
 
 <template>
-  <div class="flex h-full" @click="active(null)">
-    <VueDraggable
-      v-model="list"
-      :animation="150"
-      :group="{ name: 'people', pull: 'clone', put: false }"
-      :sort="false"
-      class="flex flex-col gap-4 basic-border w-200px"
-    >
-      <div
-        v-for="(item, index) in list"
-        :key="index"
-        class="cursor-move h-50px bg-gray-500/5 rounded p-4 shadow-md"
-      >
-        {{ item.title }}
-      </div>
-    </VueDraggable>
-    <div id="drawer-target" class="flex flex-col m-auto">
-      <div class="minH-22 mb-4 basic-border w-375px">
-        <n-dynamic-tags v-model:value="tags" @create="onCreate" />
-      </div>
-      <n-tabs
-        v-model:value="tabActive"
-        class="basic-border !px-0"
-        type="line"
-        animated
-        :tabs-padding="16"
-      >
-        <n-tab-pane
-          v-for="(tabPane, index) in tags"
-          :key="index"
-          :name="index"
-          :tab="tabPane.label"
-        >
-          <n-scrollbar style="max-height: 600px">
-            <VueDraggable
-              v-model="tabPane.value"
-              :animation="150"
-              group="people"
-              class="flex justify-between flex-wrap basic-border w-375px m-auto overflow-auto min-h-500px"
-              @add="handleAdd"
-            >
-              <div
-                v-for="(item, i) in tabPane.value"
-                :key="item.id"
-                class="cursor-move mb-4 bg-gray-500/5 rounded shadow-md relative"
-                :class="listClass(i, item.size)"
-                @click.stop="active(i)"
-              >
-                <i
-                  v-show="listActive === i"
-                  class="absolute top-2 right-2 z-1 cursor-pointer text-red-400 i-carbon:task-remove"
-                  @click.stop="removeList(item.id)"
-                ></i>
-                <component
-                  :is="componentMap.get(item.component)"
-                  :key="item.id"
-                  :option="item.option"
-                />
-              </div>
-            </VueDraggable>
-          </n-scrollbar>
-        </n-tab-pane>
-      </n-tabs>
+  <div class="flex">
+    <div class="w-1/4 xl:w-1/5 mr-4">
+      <n-input v-model:value="searchValue" placeholder="搜索" />
+      <n-tree
+        :show-irrelevant-nodes="false"
+        :pattern="searchValue"
+        :data="data"
+        block-line
+        key-field="id"
+        @update-selected-keys="handleSelect"
+      />
     </div>
-    <Drawer :list-active="listActive" :data="getActiveData" @submit="upData" />
+    <div class="w-3/4 xl:w-4/5">
+      <Table @register="registerTable">
+        <template #toolbar>
+          <n-button class="mr-2" type="primary" @click="handleAdd"> 新增 </n-button>
+        </template>
+      </Table>
+    </div>
+    <AccountModal @register="registerSetModal" @success="reload()" />
+    <ResetModal @register="registerResetModal" />
   </div>
 </template>
 
-<style lang="scss" scoped>
-  .ghost {
-    opacity: 0.5;
-    background: #c8ebfb;
-  }
-  .basic-border {
-    --at-apply: p-4 bg-white rounded shadow-md;
-  }
-</style>
+<style scoped></style>
