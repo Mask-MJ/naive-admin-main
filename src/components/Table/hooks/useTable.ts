@@ -96,12 +96,8 @@ export function useTable(tableProps?: Props): [
     clearSelectedRowKeys: () => {
       getTableInstance().clearSelectedRowKeys();
     },
-    setSelectedRowKeys: (
-      keys: (string | number)[],
-      rows: any[],
-      meta: { row: any; action: 'check' | 'uncheck' | 'checkAll' | 'uncheckAll' },
-    ) => {
-      getTableInstance().setSelectedRowKeys(keys, rows, meta);
+    setSelectedRowKeys: (keys: (string | number)[]) => {
+      getTableInstance().setSelectedRowKeys(keys);
     },
     getPagination: () => {
       return getTableInstance().getPagination();

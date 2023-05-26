@@ -7,7 +7,7 @@ import type {
   TooltipProps,
   DropdownOption,
 } from 'naive-ui';
-import type { RowKey, RowData, OnUpdateCheckedRowKeys } from 'naive-ui/es/data-table/src/interface';
+import type { RowKey, RowData } from 'naive-ui/es/data-table/src/interface';
 // import type { Size } from 'naive-ui/es/button/src/interface';
 import type { BasicFormProps } from '@/components/Form';
 
@@ -87,7 +87,7 @@ export interface TableActionType {
   /** 获取选中行的 keys */
   getSelectedRowKeys: () => RowKey[];
   /** 设置选中行 */
-  setSelectedRowKeys: OnUpdateCheckedRowKeys;
+  setSelectedRowKeys: (keys: RowKey[]) => void;
   /** 清空选中行 */
   clearSelectedRowKeys: () => void;
 

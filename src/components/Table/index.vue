@@ -20,6 +20,7 @@
   const emits = defineEmits(['change', 'register', 'fetch-success', 'fetch-error'] as string[]);
 
   const innerPropsRef = ref<Partial<BasicTableProps>>();
+  // 选中的行
   const tableData = ref<Recordable[]>([]);
   const [registerForm, formActions] = useForm();
 
@@ -40,8 +41,7 @@
       rowKey: unref(getRowKey),
       columns: toRaw(unref(getViewColumns)),
       pagination: getPagination(),
-      checkedRowKeys: getSelectedRowKeys(),
-      onUpdateCheckedRowKeys: setSelectedRowKeys,
+      checkedRowKeys: unref(checkedRowKeysRef),
     } as unknown as BasicTableProps;
   });
   // loading hooks
@@ -55,8 +55,13 @@
     getPagination,
   );
   // checked hooks
-  const { getSelectedRows, getSelectedRowKeys, setSelectedRowKeys, clearSelectedRowKeys } =
-    useRowSelection(getProps);
+  const {
+    checkedRowKeysRef,
+    getSelectedRows,
+    getSelectedRowKeys,
+    setSelectedRowKeys,
+    clearSelectedRowKeys,
+  } = useRowSelection(getProps);
   // data hooks
   const {
     getTableData,

@@ -1,4 +1,4 @@
-import type { RowKey, OnUpdateCheckedRowKeys } from 'naive-ui/es/data-table/src/interface';
+import type { RowKey } from 'naive-ui/es/data-table/src/interface';
 import type { BasicTableProps } from '../types';
 
 export function useRowSelection(propsRef: ComputedRef<BasicTableProps>) {
@@ -10,7 +10,7 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>) {
   // 获取选中的keys
   const getSelectedRowKeys = () => unref(checkedRowKeysRef);
   // 设置选中的keys
-  const setSelectedRowKeys: OnUpdateCheckedRowKeys = (rowKeys) => {
+  const setSelectedRowKeys = (rowKeys: RowKey[]) => {
     checkedRowKeysRef.value = rowKeys;
   };
   // 清空选中的keys
@@ -20,11 +20,12 @@ export function useRowSelection(propsRef: ComputedRef<BasicTableProps>) {
   // 获取选中的数据
   const getSelectedRows = () => {
     const data = propsRef.value.data || [];
-    const rowKey = propsRef.value.rowKey;
+    const rowKey = (propsRef.value.rowKey || 'id') as string;
     return data.filter((item) => checkedRowKeysRef.value.includes(item[rowKey]));
   };
 
   return {
+    checkedRowKeysRef,
     getSelectedRows,
     getSelectedRowKeys,
     setSelectedRowKeys,
