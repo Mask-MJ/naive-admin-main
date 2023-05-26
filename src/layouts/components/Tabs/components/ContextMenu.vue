@@ -57,33 +57,33 @@
       label: '重新加载',
       key: 'reload-current',
       disabled: props.currentPath !== tab.activeTab,
-      icon: () => h('i', { class: 'icon-carbon:renew' }),
+      icon: () => h('i', { class: 'i-carbon:renew' }),
     },
     {
       label: '关闭',
       key: 'close-current',
       disabled: props.currentPath === tab.homeTab.fullPath || Boolean(props.affix),
-      icon: () => h('i', { class: 'icon-carbon:close' }),
+      icon: () => h('i', { class: 'i-carbon:close' }),
     },
     {
       label: '关闭其他',
       key: 'close-other',
-      icon: () => h('i', { class: 'icon-carbon:column-delete' }),
+      icon: () => h('i', { class: 'i-carbon:column-delete' }),
     },
     {
       label: '关闭左侧',
       key: 'close-left',
-      icon: () => h('i', { class: 'icon-carbon:arrow-left' }),
+      icon: () => h('i', { class: 'i-carbon:arrow-left' }),
     },
     {
       label: '关闭右侧',
       key: 'close-right',
-      icon: () => h('i', { class: 'icon-carbon:arrow-right' }),
+      icon: () => h('i', { class: 'i-carbon:arrow-right' }),
     },
     {
       label: '关闭所有',
       key: 'close-all',
-      icon: () => h('i', { class: 'icon-ant-design:line-outlined' }),
+      icon: () => h('i', { class: 'i-carbon:closed-caption' }),
     },
   ]);
 
