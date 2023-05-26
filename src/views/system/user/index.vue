@@ -23,6 +23,7 @@
     formConfig: { labelWidth: 100, schemas },
     searchInfo,
     bordered: true,
+    rowKey: (rowData) => rowData.userId,
     actionColumn: {
       width: 200,
       key: 'ACTION',
@@ -63,7 +64,6 @@
           ],
         }),
     },
-    rowKey: (rowData) => rowData.userId,
   });
 
   const handleAdd = () => {
