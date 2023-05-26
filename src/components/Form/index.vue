@@ -241,10 +241,10 @@
     @keypress.enter="handleEnterPress"
   >
     <n-grid v-bind="getBindGridValue">
-      <template v-for="item in schemas" :key="item.path">
-        <NFormItemGi v-show="getShow(item).isShow" v-bind="getBindItemValue(item)">
+      <template v-for="schema in schemas" :key="schema.path">
+        <NFormItemGi v-show="getShow(schema).isShow" v-bind="getBindItemValue(schema)">
           <FormItemComponent
-            :schema="item"
+            :schema="schema"
             v-bind="getBindComponentValue"
             @path-value-change="setFormModel"
           >

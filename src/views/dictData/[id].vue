@@ -1,16 +1,14 @@
 <script setup lang="ts">
-  import type { DictList } from '@/api/system/types/dict';
+  import type { DictList } from '@/api/modules/system/types/dict';
   import { useModal } from '@/components/Modal';
-  import { TableAction, useTable } from '@/components/Table';
+  import { Action, useTable } from '@/components/Table';
   import { columns, schemas } from './data';
-  import { getDictDataList, deleteDictDataList } from '@/api/system/dict';
-  import { useGo } from '@/hooks/usePage';
+  import { getDictDataList, deleteDictDataList } from '@/api/modules/system/dict';
   import { find } from 'lodash';
   import setModal from './modal/setModal.vue';
 
   const props = defineProps({ id: { type: String } });
 
-  const go = useGo();
   const router = useRouter();
   const { removeTab } = useMultipleTabStore();
   const getSchemas = () => {
@@ -35,28 +33,17 @@
       flag: 'ACTION',
       key: 'ACTION',
       render: (rowData: DictList) =>
-        h(TableAction, {
+        h(Action, {
           actions: [
             {
-              type: 'primary',
-              icon: 'i-ant-design:form-outlined',
-              tooltip: '编辑',
-              onClick: () => {
-                openModal(true, { isUpdate: true, rowData });
-              },
+              type: 'edit',
+              onClick: () => openModal(true, { isUpdate: true, rowData }),
             },
             {
-              type: 'error',
-              icon: 'i-ant-design:delete-outlined',
-              label: '是否确认删除',
-              popConfirm: {
-                showIcon: false,
-                positiveButtonProps: { type: 'error' },
-                onPositiveClick: async () => {
-                  await deleteDictDataList(rowData.dictCode);
-                  window.$message.success('删除成功');
-                  await reload();
-                },
+              type: 'del',
+              onClick: async () => {
+                await deleteDictDataList(rowData.dictCode);
+                await reload();
               },
             },
           ],
@@ -69,7 +56,7 @@
   };
   const handleClose = async () => {
     await removeTab(router.currentRoute.value.fullPath);
-    go('/system/dict');
+    router.push('/system/dict');
   };
 </script>
 

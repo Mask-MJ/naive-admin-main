@@ -1,6 +1,6 @@
 import type { FormSchema } from '@/components/Form';
 import type { BasicColumn } from '@/components/Table';
-import { getDictList } from '@/api/system/dict';
+import { getDictList } from '@/api/modules/system/dict';
 
 import { NTag } from 'naive-ui';
 
@@ -9,7 +9,7 @@ export const schemas: FormSchema[] = [
     path: 'dictType',
     component: 'ApiSelect',
     label: '字典名称',
-    giProps: { span: 6 },
+    span: 6,
     componentProps: {
       disabled: true,
       api: getDictList,
@@ -24,14 +24,14 @@ export const schemas: FormSchema[] = [
     path: 'dictLabel',
     component: 'NInput',
     label: '字典标签',
-    giProps: { span: 6 },
+    span: 6,
     componentProps: { placeholder: '请输入字典标签' },
   },
   {
     path: 'status',
     component: 'NSelect',
     label: '数据状态',
-    giProps: { span: 4 },
+    span: 4,
     componentProps: {
       options: [
         { label: '正常', value: '0' },

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useModalInner } from '@/components/Modal';
   import { useForm } from '@/components/Form';
-  import { editDictDataList, addDictDataList } from '@/api/system/dict';
+  import { editDictDataList, addDictDataList } from '@/api/modules/system/dict';
   import { schemas } from './data';
 
   const emits = defineEmits(['success', 'register']);
