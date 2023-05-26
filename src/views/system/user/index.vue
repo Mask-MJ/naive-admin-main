@@ -30,14 +30,8 @@
         h(Action, {
           actions: [
             {
-              icon: 'i-carbon:edit',
-              tooltipProps: { content: '编辑' },
-              buttonProps: {
-                type: 'primary',
-                onClick: () => {
-                  openSetModel(true, { userId: row.userId, treeData: data.value });
-                },
-              },
+              type: 'edit',
+              onClick: () => openSetModel(true, { userId: row.userId, treeData: data.value }),
             },
             {
               icon: 'i-ant-design:user-outlined',
@@ -60,16 +54,10 @@
               },
             },
             {
-              icon: 'i-carbon:delete',
-              tooltipProps: { content: '删除' },
-              buttonProps: { type: 'error' },
-              popConfirmProps: {
-                content: '是否确认删除',
-                onPositiveClick: async () => {
-                  await deleteUser(row.userId);
-                  window.$message.success('删除成功');
-                  await reload();
-                },
+              type: 'del',
+              onClick: async () => {
+                await deleteUser(row.userId);
+                await reload();
               },
             },
           ],

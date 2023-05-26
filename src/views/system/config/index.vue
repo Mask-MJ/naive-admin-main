@@ -21,24 +21,14 @@
         h(Action, {
           actions: [
             {
-              icon: 'i-carbon:edit',
-              tooltipProps: { content: '编辑' },
-              buttonProps: {
-                type: 'primary',
-                onClick: () => openModal(true, { configId: row.configId }),
-              },
+              type: 'edit',
+              onClick: () => openModal(true, { configId: row.configId }),
             },
             {
-              icon: 'i-carbon:delete',
-              tooltipProps: { content: '删除' },
-              buttonProps: { type: 'error' },
-              popConfirmProps: {
-                content: '是否确认删除',
-                onPositiveClick: async () => {
-                  await delConfig(row.configId);
-                  window.$message.success('删除成功');
-                  await reload();
-                },
+              type: 'del',
+              onClick: async () => {
+                await delConfig(row.configId);
+                await reload();
               },
             },
           ],
