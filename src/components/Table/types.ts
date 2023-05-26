@@ -138,34 +138,6 @@ export interface GetColumnsParams {
   ignoreAction?: boolean;
 }
 
-// export interface ActionItem extends ButtonProps {
-//   onClick?: Fn;
-//   label?: string;
-//   color?: 'success' | 'error' | 'warning';
-//   icon?: string;
-//   popConfirm?: PopconfirmProps;
-//   disabled?: boolean;
-//   divider?: boolean;
-//   // 权限编码控制是否显示
-//   auth?: string | string[];
-//   // 业务控制是否显示
-//   ifShow?: boolean | ((action: ActionItem) => boolean);
-//   tooltip?: string | TooltipProps;
-//   showTooltip?: boolean;
-//   size?: Size;
-// }
-// export interface ActionItem2 extends DropdownOption {
-//   props?: ButtonProps;
-// }
-// export type ActionItem = DropdownOption & {
-//   onClick?: Fn;
-//   label?: string;
-//   popConfirm?: PopconfirmProps;
-//   tooltip?: string | TooltipProps;
-//   icon?: string;
-//   auth?: string | string[];
-// };
-
 export interface ActionItem {
   label?: string;
   popConfirmProps?: PopconfirmProps & { content: string };
@@ -175,6 +147,10 @@ export interface ActionItem {
   auth?: string | string[];
   // 业务控制是否显示
   ifShow?: boolean | ((action: ActionItem) => boolean);
+  // 编辑和删除几乎每个表格都有，所以提取出来
+  type?: 'edit' | 'del';
+  // 需要调用的事件
+  onClick?: Fn;
 }
 
 export type DropdownItem = DropdownOption & {

@@ -33,10 +33,42 @@
     return { trigger: 'click', options };
   });
   const getActions = computed(() => {
-    return (toRaw(props.actions) || []).filter((action) => {
-      // 权限过滤 hasPermission(action.auth)
-      return isIfShow(action);
-    });
+    return (toRaw(props.actions) || [])
+      .filter((action) => {
+        // 权限过滤 hasPermission(action.auth)
+        return isIfShow(action);
+      })
+      .map((action): ActionItem => {
+        if (action.type === 'edit') {
+          return {
+            icon: 'i-carbon:edit',
+            tooltipProps: { content: '编辑' },
+            buttonProps: {
+              type: 'primary',
+              onClick: () => action.onClick?.(),
+            },
+          };
+        } else if (action.type === 'del') {
+          return {
+            icon: 'i-carbon:delete',
+            tooltipProps: { content: '删除' },
+            buttonProps: { type: 'error' },
+            popConfirmProps: {
+              content: '是否确认删除',
+              onPositiveClick: async () => {
+                try {
+                  await action.onClick?.();
+                  window.$message.success('删除成功');
+                } catch (error) {
+                  window.$message.error(`操作失败 ${error}`);
+                }
+              },
+            },
+          };
+        } else {
+          return action;
+        }
+      });
   });
 
   function onCellClick(e: MouseEvent) {
