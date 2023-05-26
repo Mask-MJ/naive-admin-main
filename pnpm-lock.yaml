@@ -13,6 +13,9 @@ dependencies:
   colord:
     specifier: ^2.9.3
     version: 2.9.3
+  cropperjs:
+    specifier: ^1.5.13
+    version: 1.5.13
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
@@ -157,7 +160,7 @@ devDependencies:
     specifier: ^9.1.1
     version: 9.1.1(eslint@8.39.0)
   vue-tsc:
-    specifier: ^1.4.4
+    specifier: ^1.2.0
     version: 1.4.4(typescript@5.0.4)
 
 packages:
@@ -2504,6 +2507,10 @@ packages:
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
     dev: true
+
+  /cropperjs@1.5.13:
+    resolution: {integrity: sha512-by7jKAo73y5/Do0K6sxdTKHgndY0NMjG2bEdgeJxycbcmHuCiMXqw8sxy5C5Y5WTOTcDGmbT7Sr5CgKOXR06OA==}
+    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
