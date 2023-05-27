@@ -29,8 +29,13 @@
     "noUnusedParameters": true,
     // ↓启用实验性的ES装饰器。
     "experimentalDecorators": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     // ↓编译过程中需要引入的库文件的列表。
-    "lib": ["dom", "esnext"],
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     // ↓要包含的类型声明文件名列表。
     "types": [
       "vite/client",
@@ -39,7 +44,10 @@
       "vite-plugin-vue-layouts/client"
     ],
     // ↓要包含的类型声明文件路径列表。
-    "typeRoots": ["./node_modules/@types/", "./types"],
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./types"
+    ],
     "incremental": true,
     // ↓在表达式和声明上有隐含的 any类型时报错。
     // "noImplicitAny": false,
@@ -48,8 +56,12 @@
     "removeComments": true,
     // ↓模块名到基于 baseUrl的路径映射的列表。查看 模块解析文档了解详情。
     "paths": {
-      "@/*": ["src/*"],
-      "#/*": ["types/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "#/*": [
+        "types/*"
+      ]
     }
   },
   // ↓指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
@@ -65,5 +77,9 @@
     "vite.config.ts"
   ],
   // 指定一个排除列表（include的反向操作）
-  "exclude": ["node_modules", "dist", "**/*.js"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.js"
+  ]
 }
