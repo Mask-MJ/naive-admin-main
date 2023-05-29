@@ -19,7 +19,7 @@
     try {
       await validate();
       const result = getPathsValue();
-      recharge({ userId: result.id, ...result });
+      await recharge({ userId: result.id, ...result });
       emits('success');
       closeModal();
     } catch (error) {}
