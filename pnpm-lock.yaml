@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@types/qs':
@@ -23,8 +27,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   naive-ui:
-    specifier: ^2.34.3
-    version: 2.34.3(vue@3.2.47)
+    specifier: ^2.34.4
+    version: 2.34.4(vue@3.2.47)
   pinia:
     specifier: ^2.0.35
     version: 2.0.35(typescript@5.0.4)(vue@3.2.47)
@@ -157,7 +161,7 @@ devDependencies:
     specifier: ^9.1.1
     version: 9.1.1(eslint@8.39.0)
   vue-tsc:
-    specifier: ^1.4.4
+    specifier: ^1.2.0
     version: 1.4.4(typescript@5.0.4)
 
 packages:
@@ -4236,8 +4240,8 @@ packages:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
 
-  /naive-ui@2.34.3(vue@3.2.47):
-    resolution: {integrity: sha512-fUMr0dzb/iGsOTWgoblPVobY5X5dihQ1eam5dA+H74oyLYAvgX4pL96xQFPBLIYqvyRFBAsN85kHN5pLqdtpxA==}
+  /naive-ui@2.34.4(vue@3.2.47):
+    resolution: {integrity: sha512-aPG8PDfhSzIzn/jSC9y3Jb3Pe2wHJ7F0cFV1EWlbImSrZECeUmoc+fIcOSWbizoztkKfaUAeKwYdMl09MKkj1g==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
