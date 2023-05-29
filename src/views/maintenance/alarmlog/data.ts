@@ -10,7 +10,7 @@ export const columns: BasicColumn<List>[] = [
   { title: '告警编码', key: 'alarmCode', width: 100 },
   { title: '告警内容', key: 'alarmMsg', width: 150 },
   { title: '告警状态', key: 'alarmStatus.desc', width: 100 },
-  { title: '告警值', key: 'alarmValue', width: 100 },
+  { title: '告警值', key: 'alarmValue', width: 120 },
   {
     title: '处理说明',
     key: 'handleMsg',
