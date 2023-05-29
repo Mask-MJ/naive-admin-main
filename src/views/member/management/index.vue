@@ -18,9 +18,7 @@
     formConfig: { labelWidth: 100, schemas },
     rowKey: (rowData) => rowData.id,
     actionColumn: {
-      width: 150,
-      title: '操作',
-      flag: 'ACTION',
+      width: 200,
       key: 'ACTION',
       render: (row: List) =>
         h(Action, {
