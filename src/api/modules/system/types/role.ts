@@ -6,6 +6,10 @@ export interface RoleList {
   admin: boolean;
   roleId: string;
   status: string;
+  roleName: string;
+  roleKey: string;
+  roleSort: number;
+  createTime: string;
 }
 
 export interface SetRoleParams {

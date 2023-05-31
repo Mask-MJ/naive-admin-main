@@ -35,7 +35,7 @@
               onClick: () => openSetModel(true, { userId: row.userId, treeData: data.value }),
             },
             {
-              icon: 'i-ant-design:user-outlined',
+              icon: 'i-carbon:user-role',
               tooltipProps: { content: '分配角色' },
               buttonProps: {
                 type: 'warning',

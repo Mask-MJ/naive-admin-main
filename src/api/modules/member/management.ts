@@ -6,7 +6,9 @@ import type {
   Details,
   CarDetail,
   RecordListParams,
+  RecordList,
   OverListParams,
+  OverList,
 } from './types/management';
 import { defHttp } from '@/api';
 
@@ -44,9 +46,9 @@ export const getDetails = (id: string) => defHttp.get<Details>({ url: Api.Detail
 export const getMemberCars = (id: string) => defHttp.get<CarDetail[]>({ url: Api.MemberCars + id });
 // 获取会员交易记录
 export const getRecordList = (params?: RecordListParams) =>
-  defHttp.get({ url: Api.RecordList, params });
+  defHttp.get<RecordList>({ url: Api.RecordList, params });
 // 获取会员充电订单
 export const getOrderList = (params?: OverListParams) =>
-  defHttp.get({ url: Api.OrderList, params });
+  defHttp.get<OverList>({ url: Api.OrderList, params });
 // 切换会员充电卡状态
 export const setCardStatus = (id: string) => defHttp.put({ url: Api.CardStatus + id });

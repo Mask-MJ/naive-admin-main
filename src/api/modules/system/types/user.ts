@@ -1,16 +1,24 @@
-// import { BasicPageParams, BasicResult } from '@/api/model/baseModel';
-export type AccountParams = {
-  account?: string;
-  nickname?: string;
-};
 export interface RoleStatus {
   status: string;
   userId: string;
 }
 
+export interface AccountParams {
+  userName: string;
+  phonenumber: number;
+  status: string;
+  userType: string;
+  ['[beginTime, endTime]']: [Date, Date];
+}
+
 export interface AccountList {
   status: string;
   userId: string;
+  userName: string;
+  nickName: string;
+  email: string;
+  createTime: string;
+  ['dept.deptName']: string;
 }
 
 export interface UserInfoParams {

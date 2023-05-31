@@ -1,9 +1,7 @@
 export interface ListParams {
-  pageNum: number;
-  pageSize: number;
-  phoneNumber?: string;
-  nickName?: string;
-  status?: number;
+  phoneNumber: string;
+  nickName: string;
+  status: number;
 }
 
 export interface List {
@@ -13,18 +11,28 @@ export interface List {
 export interface RechargeParams {
   userId: string;
   money: number;
+  [x: string]: any;
+}
+
+export interface RecordList {
+  adjustMoney: number;
+  balance: number;
+  createTime: string;
+  id: string;
+  incomeOrPay: string;
+  tradeSource: string;
+  tradeType: { desc: string; type: number };
 }
 
 export interface RecordListParams {
-  pageNum: number;
-  pageSize: number;
-  beginTime: Date;
-  endTime: Date;
   status: number;
   id: string;
+  beginTime: Date;
+  endTime: Date;
 }
 
 export interface OverChargeParams {
+  id: string;
   limitAmount: number;
   limitOrder: number;
   memberId: string;
@@ -34,13 +42,46 @@ export interface OverChargeParams {
 export interface OverListParams {
   pageNum: number;
   pageSize: number;
-  startTime: Date;
-  endTime: Date;
   orderCode: number;
   stationName: number;
   code: number;
   startMode: number;
   phoneNumber: number;
+  startTime: Date;
+  endTime: Date;
+}
+
+export interface OverList {
+  beginTime: string;
+  code: string;
+  createBy: string;
+  createTime: string;
+  discountMoney: number;
+  endTime: string;
+  gunId: string;
+  gunName: string;
+  id: string;
+  isAbnormal: boolean;
+  memberCarId: null | string;
+  memberId: string;
+  orderCode: string;
+  orderStatus: { type: number; desc: string };
+  originalMoney: number;
+  ownerId: string;
+  payStatus: { type: number; desc: string };
+  payTime: null | string;
+  paymentMethod: null | { type: number; desc: string };
+  phoneNumber: string;
+  pileId: string;
+  source: number;
+  startMode: { type: number; desc: string };
+  stationId: string;
+  stationName: string;
+  totalBattery: number;
+  totalMoney: number;
+  totalTime: string;
+  updateBy: string;
+  updateTime: string;
 }
 
 export interface userCardItem {
