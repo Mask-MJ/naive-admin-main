@@ -62,8 +62,8 @@
       if (props.isScroll) {
         totalPage.value = result.total;
       }
-      if (!isArray(result.data)) {
-        result.data = get(result.data, props.resultField) || [];
+      if (!isArray(result)) {
+        result.data = get(result, props.resultField) || [];
       }
 
       optionsRef.value = props.isScroll ? optionsRef.value.concat(result.data) : result.data;

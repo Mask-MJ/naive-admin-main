@@ -17,6 +17,8 @@ import type {
   DividerProps,
   RateProps,
   TagProps,
+  UploadProps,
+  UploadCustomRequestOptions,
 } from 'naive-ui';
 
 interface NInput {
@@ -81,6 +83,14 @@ interface ApiTreeSelect {
     params?: any;
     immediate?: boolean;
     resultField?: string;
+  };
+}
+
+interface Upload {
+  component: 'Upload';
+  componentProps?: UploadProps & {
+    type?: string[];
+    api?: (options: UploadCustomRequestOptions) => void;
   };
 }
 
@@ -170,6 +180,7 @@ export type ComponentMap =
   | NSlider
   | NDivider
   | NRate
+  | Upload
   | SelectPicker;
 
 export type ComponentType = Pick<ComponentMap, 'component'>['component'];

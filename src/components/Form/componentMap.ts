@@ -24,6 +24,7 @@ import ApiSelect from './components/ApiSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
 import IconPicker from './components/IconPicker.vue';
 import SelectPicker from './components/SelectPicker.vue';
+import Upload from './components/Upload.vue';
 
 export const componentMap = new Map<ComponentType, Component>();
 
@@ -47,4 +48,5 @@ componentMap.set('NRate', NRate);
 componentMap.set('NIconPicker', IconPicker);
 componentMap.set('NDatePicker', NDatePicker);
 componentMap.set('NTimePicker', NTimePicker);
+componentMap.set('Upload', Upload);
 componentMap.set('NDivider', NDivider);

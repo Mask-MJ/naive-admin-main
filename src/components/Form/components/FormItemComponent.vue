@@ -51,12 +51,15 @@
     const { path, component, changeEvent } = props.schema;
     const isCheck = component && ['NSwitch', 'NCheckbox'].includes(component);
     const isTree = component && ['ApiTree', 'NTree'].includes(component);
+    const isUpload = component && ['Upload'].includes(component);
     // const isDate = component && ['NDatePicker'].includes(component);
 
     // const eventKey = `on${upperFirst(changeEvent)}`;
     const eventKey = computed(() => {
       if (changeEvent) {
         return `on${upperFirst(changeEvent)}`;
+      } else if (isUpload) {
+        return 'onUpdate:fileList';
       } else if (isTree) {
         return 'onUpdateCheckedKeys';
       } else {

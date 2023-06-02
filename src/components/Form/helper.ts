@@ -31,7 +31,7 @@ export function createFormItemRule(schemas: FormSchema) {
     if (['NInput', 'NAutoComplete'].includes(schemas.component)) {
       rule.trigger = ['blur', 'input'];
     } else if (['ApiSelect', 'ApiTree', 'NTreeSelect'].includes(schemas.component)) {
-      rule.type = 'array';
+      // rule.type = 'array';
       rule.trigger = ['blur', 'change'];
     } else if (['NCheckbox', 'NCheckboxGroup'].includes(schemas.component)) {
       rule.type = 'array';

@@ -9,8 +9,9 @@ import axios from 'axios';
 import qs from 'qs';
 import { cloneDeep, isFunction } from 'lodash-es';
 import axiosRetry from 'axios-retry';
-import type { RequestOptions, Result, UploadFileParams } from './types';
+import type { RequestOptions, Result } from './types';
 import type { CreateAxiosOptions } from './axiosTransform';
+import type { UploadCustomRequestOptions } from 'naive-ui';
 import { AxiosCanceler } from './axiosCancel';
 import { ContentTypeEnum, RequestEnum } from './httpEnum';
 
@@ -117,34 +118,34 @@ export class VAxios {
   /**
    * @description:  File Upload
    */
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
-    const formData = new window.FormData();
-    const customFilename = params.name || 'file';
+  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadCustomRequestOptions) {
+    let conf: CreateAxiosOptions = cloneDeep(config);
+    const { file, data } = params;
+    const transform = this.getTransform();
 
-    if (params.filename) formData.append(customFilename, params.file, params.filename);
-    else formData.append(customFilename, params.file);
+    const { requestOptions } = this.options;
 
-    if (params.data) {
-      Object.keys(params.data).forEach((key) => {
-        const value = params.data![key];
-        if (Array.isArray(value)) {
-          value.forEach((item) => {
-            formData.append(`${key}[]`, item);
-          });
-          return;
-        }
+    const opt: RequestOptions = Object.assign({}, requestOptions, params);
 
-        formData.append(key, params.data![key]);
+    const { beforeRequestHook } = transform || {};
+    if (beforeRequestHook && isFunction(beforeRequestHook)) {
+      conf = beforeRequestHook(conf, opt);
+    }
+
+    const formData = new FormData();
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        formData.append(key, data[key as keyof UploadCustomRequestOptions['data']]);
       });
     }
+    formData.append(file.name, file.file as File);
+
     return this.axiosInstance.request<T>({
-      ...config,
+      ...conf,
       method: 'POST',
       data: formData,
       headers: {
-        // 'Content-type': ContentTypeEnum.FORM_DATA,
-        'Content-type': ContentTypeEnum.JSON,
-        ignoreCancelToken: true,
+        'Content-type': ContentTypeEnum.FORM_DATA,
       },
     });
   }
@@ -158,8 +159,9 @@ export class VAxios {
       contentType !== ContentTypeEnum.FORM_URLENCODED ||
       !Reflect.has(config, 'data') ||
       config.method?.toUpperCase() === RequestEnum.GET
-    )
+    ) {
       return config;
+    }
 
     return {
       ...config,
@@ -192,7 +194,9 @@ export class VAxios {
     const opt: RequestOptions = Object.assign({}, requestOptions, options);
 
     const { beforeRequestHook, requestCatchHook, transformRequestHook } = transform || {};
-    if (beforeRequestHook && isFunction(beforeRequestHook)) conf = beforeRequestHook(conf, opt);
+    if (beforeRequestHook && isFunction(beforeRequestHook)) {
+      conf = beforeRequestHook(conf, opt);
+    }
 
     conf.requestOptions = opt;
 

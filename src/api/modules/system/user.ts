@@ -1,4 +1,3 @@
-import type { UploadFileParams } from '@/api/request/types';
 import type {
   AccountParams,
   RoleStatus,
@@ -9,9 +8,6 @@ import type {
 } from './types/user';
 
 import { defHttp } from '@/api';
-import { getAppEnvConfig } from '@/utils/env';
-
-const { VITE_GLOB_UPLOAD_URL } = getAppEnvConfig();
 
 enum Api {
   List = '/system/user/list',
@@ -49,11 +45,11 @@ export const getAuthRole = (params: any) => defHttp.get({ url: Api.AuthRole + pa
 // 提交分配角色
 export const setAutoRole = (params: string) => defHttp.put({ url: Api.AuthRole + params });
 // 上传头像
-export const uploadAvatar = (params: UploadFileParams) =>
-  defHttp.uploadFile(
-    { url: VITE_GLOB_UPLOAD_URL + Api.UploadAvatar },
-    { name: 'avatarfile', file: params.file },
-  );
+// export const uploadAvatar = (params: UploadFileParams) =>
+//   defHttp.uploadFile(
+//     { url: VITE_GLOB_UPLOAD_URL + Api.UploadAvatar },
+//     { name: 'avatarfile', file: params.file },
+//   );
 // 获取基础信息
 export const getProfile = () => defHttp.get({ url: Api.Profile });
 // 修改基础信息
