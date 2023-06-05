@@ -1,13 +1,18 @@
 import type { BasicColumn, FormSchema } from '@/components/Table';
 import type { Applist } from '@/api/modules/cooperation/types/application';
 
-import { NPopconfirm, NSwitch } from 'naive-ui';
+import { NPopconfirm, NSwitch, NImage } from 'naive-ui';
 import { getGroupList, changeStatus } from '@/api/modules/cooperation/application';
 
 export const columns: BasicColumn<Applist & { pendingStatus: boolean }>[] = [
   { title: '应用名称', key: 'appName', width: 100 },
   { title: '所属分组', key: 'groupName', width: 100 },
-  { title: '图标地址', key: 'icon', width: 100 },
+  {
+    title: '图标',
+    key: 'icon',
+    width: 100,
+    render: (rowData) => h(NImage, { src: rowData.icon, fit: 'cover' }),
+  },
   { title: '跳转地址', key: 'url', width: 100 },
   { title: '排序号', key: 'sort', width: 100 },
   {

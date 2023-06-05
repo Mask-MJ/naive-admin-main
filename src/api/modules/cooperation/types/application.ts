@@ -31,3 +31,16 @@ export interface EnableStatusParams {
   id: string;
   enable: number;
 }
+
+export interface GroupListReault {
+  rows: {
+    id: string;
+    sort: number;
+    name: string;
+  }[];
+}
+
+export interface AddGroupParams {
+  name: string;
+  sort: number;
+}

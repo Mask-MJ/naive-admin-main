@@ -4,6 +4,8 @@ import type {
   Applist,
   SetApplicationParams,
   EnableStatusParams,
+  GroupListReault,
+  AddGroupParams,
 } from './types/application';
 import { defHttp } from '@/api';
 
@@ -29,7 +31,11 @@ export const updateApp = (params: SetApplicationParams) =>
 export const deleteApp = (id: string) => defHttp.delete({ url: Api.deleteApp + id });
 
 // 分组列表查询
-export const getGroupList = () => defHttp.get({ url: Api.groupList });
+export const getGroupList = () => defHttp.get<GroupListReault>({ url: Api.groupList });
+// 新增分组
+export const addGroup = (params: AddGroupParams) => defHttp.post({ url: Api.addGroup, params });
+// 删除分组
+export const deleteGroup = (id: string) => defHttp.delete({ url: Api.deleteGroup + id });
 
 // 改变app启用状态
 export const changeStatus = ({ id, enable }: EnableStatusParams) =>

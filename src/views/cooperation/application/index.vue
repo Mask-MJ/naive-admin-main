@@ -7,8 +7,10 @@
   import { useModal } from '@/components/Modal';
   import setModal from './modal/setModal.vue';
   import setGroupModal from './modal/setGroupModal.vue';
+  import detailModal from './modal/detailModal.vue';
 
   const [registerSetModal, { openModal: openSetModel }] = useModal();
+  const [registerDetailModal, { openModal: openDetailModel }] = useModal();
   const [registerGroupModal, { openModal: openGroupModel }] = useModal();
   const [registerTable, { reload }] = useTable({
     api: getAppList,
@@ -28,7 +30,7 @@
               tooltipProps: { content: '详情' },
               buttonProps: {
                 type: 'warning',
-                onClick: () => {},
+                onClick: () => openDetailModel(true, row),
               },
             },
             {
@@ -55,4 +57,5 @@
   </Table>
   <setModal @register="registerSetModal" @success="reload()" />
   <setGroupModal @register="registerGroupModal" @success="reload()" />
+  <detailModal @register="registerDetailModal" />
 </template>
