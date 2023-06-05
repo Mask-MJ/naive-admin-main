@@ -91,7 +91,7 @@ export const schemas: FormSchema[] = [
       allOptions: true,
       resultField: 'rows',
       labelField: 'name',
-      valueField: 'name',
+      valueField: 'id',
     },
   },
 ];

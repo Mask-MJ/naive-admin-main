@@ -53,7 +53,6 @@ interface ApiSelect {
     params?: any;
     immediate?: boolean;
     resultField?: string;
-    isScroll?: boolean;
     allOptions?: boolean;
   };
 }

@@ -13,7 +13,6 @@ export const schemas: FormSchema[] = [
     componentProps: {
       disabled: true,
       api: getDictList,
-      isScroll: true,
       allOptions: true,
       resultField: 'rows',
       labelField: 'dictName',
