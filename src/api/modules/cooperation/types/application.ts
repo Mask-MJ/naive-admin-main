@@ -32,6 +32,10 @@ export interface EnableStatusParams {
   enable: number;
 }
 
+export interface GroupListParams {
+  pageNum: number;
+}
+
 export interface GroupListReault {
   rows: {
     id: string;
