@@ -102,7 +102,7 @@
       value = 'checked';
     } else if (isTree) {
       value = 'checkedKeys';
-    } else if (component === 'NDatePicker' && componentProps?.type === 'datetime') {
+    } else if (component === 'NDatePicker' && componentProps?.valueFormat) {
       value = 'formattedValue';
     } else {
       value = 'value';
