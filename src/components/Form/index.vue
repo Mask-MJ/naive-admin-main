@@ -52,7 +52,7 @@
         }
       }
     }
-    if (unref(getProps).formAction.showAdvancedButton) {
+    if (unref(getProps).formAction.show) {
       return schemas.filter((schema) => schema.component !== 'NDivider');
     } else {
       return schemas;
