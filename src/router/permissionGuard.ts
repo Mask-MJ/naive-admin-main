@@ -63,6 +63,12 @@ function createPermissionGuard(router: Router) {
       return;
     }
 
+    // 前往根路径, 重定向到首页
+    if (to.path === '/') {
+      next(PageEnum.BASE_HOME);
+      return;
+    }
+
     // 判断是否存有用户信息
     if (Object.keys(userStore.userInfo).length === 0) {
       try {
