@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <Modal title="公众号应用详情" class="!w-200" positive-text="" @register="registerModal">
+  <Modal title="会员车辆详细信息" class="!w-200" positive-text="" @register="registerModal">
     <Descriptions class="mb-4" :schema="DescItemSchemas" :data="detailData" />
     <NDivider title-placement="left">车辆图片</NDivider>
     <template v-for="item in imgList" :key="item">
