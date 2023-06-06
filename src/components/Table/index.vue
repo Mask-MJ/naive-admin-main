@@ -182,7 +182,7 @@
         <div>
           <slot name="toolbar" />
         </div>
-        <Toolbars v-if="showToolbars" v-bind="getProps" @table-action="toolbarsAction" />
+        <Toolbars v-if="getProps.showToolbars" v-bind="getProps" @table-action="toolbarsAction" />
       </div>
       <!-- 表格主体 -->
       <n-data-table
