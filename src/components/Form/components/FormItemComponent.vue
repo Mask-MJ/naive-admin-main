@@ -48,7 +48,7 @@
   // 获取需要绑定到组件上的值
   const getBindComponentValue = computed(() => {
     const { formModel } = props;
-    const { path, component, changeEvent } = props.schema;
+    const { path, component, changeEvent, componentProps } = props.schema;
     const isCheck = component && ['NSwitch', 'NCheckbox'].includes(component);
     const isTree = component && ['ApiTree', 'NTree'].includes(component);
     const isUpload = component && ['Upload'].includes(component);
@@ -97,7 +97,16 @@
     }
     propsData.formValues = getValues.value;
 
-    const value = isCheck ? 'checked' : isTree ? 'checkedKeys' : 'value';
+    let value = 'value';
+    if (isCheck) {
+      value = 'checked';
+    } else if (isTree) {
+      value = 'checkedKeys';
+    } else if (component === 'NDatePicker' && componentProps?.type === 'datetime') {
+      value = 'formattedValue';
+    } else {
+      value = 'value';
+    }
 
     const bindValue = {
       [value]: formModel[path],
