@@ -6,7 +6,6 @@ import {
   NSelect,
   NCheckbox,
   NCheckboxGroup,
-  NAutoComplete,
   NCascader,
   NDatePicker,
   NInputNumber,
@@ -20,6 +19,7 @@ import {
 } from 'naive-ui';
 import ApiTree from './components/ApiTree.vue';
 import ApiTreeSelect from './components/ApiTreeSelect.vue';
+import AutoComplete from './components/AutoComplete.vue';
 import ApiSelect from './components/ApiSelect.vue';
 import RadioGroup from './components/RadioGroup.vue';
 import IconPicker from './components/IconPicker.vue';
@@ -30,7 +30,7 @@ export const componentMap = new Map<ComponentType, Component>();
 
 componentMap.set('NInput', NInput);
 componentMap.set('NInputNumber', NInputNumber);
-componentMap.set('NAutoComplete', NAutoComplete);
+componentMap.set('AutoComplete', AutoComplete);
 componentMap.set('NSelect', NSelect);
 componentMap.set('ApiSelect', ApiSelect);
 componentMap.set('SelectPicker', SelectPicker);

@@ -111,9 +111,15 @@ interface NCheckboxGroup {
   componentProps?: CheckboxGroupProps;
 }
 
-interface NAutoComplete {
-  component: 'NAutoComplete';
-  componentProps?: AutoCompleteProps;
+interface AutoComplete {
+  component: 'AutoComplete';
+  componentProps?: AutoCompleteProps & {
+    api?: any;
+    params?: any;
+    immediate?: boolean;
+    resultField?: string;
+    allOptions?: boolean;
+  };
 }
 
 interface NCascader {
@@ -171,7 +177,6 @@ export type ComponentMap =
   | NRadioGroup
   | NCheckbox
   | NCheckboxGroup
-  | NAutoComplete
   | NCascader
   | NDatePicker
   | NTimePicker
@@ -180,6 +185,7 @@ export type ComponentMap =
   | NDivider
   | NRate
   | Upload
+  | AutoComplete
   | SelectPicker;
 
 export type ComponentType = Pick<ComponentMap, 'component'>['component'];
