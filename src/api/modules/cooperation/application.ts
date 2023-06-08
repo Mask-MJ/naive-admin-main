@@ -44,4 +44,4 @@ export const changeStatus = ({ id, enable }: EnableStatusParams) =>
   defHttp.put({ url: `${Api.enableStatus}/${id}/${enable}` });
 
 export const uploadIcon = (params: UploadCustomRequestOptions) =>
-  defHttp.uploadFile({ url: Api.uploadIcon }, params);
+  defHttp.uploadFile({ url: Api.uploadIcon, isChecked: true }, params);

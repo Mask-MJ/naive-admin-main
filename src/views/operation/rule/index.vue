@@ -71,7 +71,7 @@
     {
       label: '详情',
       props: {
-        icon: 'i-ant-design:eye-outlined',
+        icon: 'i-carbon:view',
         onClick: () => openDetailModel(true, row),
       },
     },

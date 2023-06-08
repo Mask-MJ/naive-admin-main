@@ -225,6 +225,7 @@
         isInitedDefaultRef.value = true;
       }
     },
+    { deep: true },
   );
 
   onMounted(() => {

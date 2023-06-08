@@ -4,7 +4,7 @@ import { defHttp } from '@/api';
 
 enum Api {
   CarList = '/base/charge-car/list', // 获取充电车的列表
-  ChargeType = '/system/dict/data/type/base_charge_type', // 获取充电类型
+  DictChargeType = '/system/dict/data/type/base_charge_type', // 获取充电类型
   AddCar = '/base/charge-car/save', //新增充电车型 (wtf: 就不能统一一下)
   GetCar = '/base/charge-car/getById/', //通过ID获取车型
   UpdateCar = '/base/charge-car/update', //修改车型
@@ -22,4 +22,4 @@ export const deleteCar = (params: string) => defHttp.delete({ url: Api.DeleteCar
 export const setCar = (params: CarListParams) => defHttp.put({ url: Api.UpdateCar, params });
 
 //  获取充电类型(字典)
-export const getChargeType = () => defHttp.get({ url: Api.ChargeType });
+export const getChargeType = () => defHttp.get({ url: Api.DictChargeType });
