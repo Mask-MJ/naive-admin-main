@@ -11,6 +11,9 @@ export interface CreateAxiosOptions extends AxiosRequestConfig {
 }
 
 declare module 'axios' {
+  export interface AxiosRequestConfig {
+    isChecked?: boolean;
+  }
   export interface InternalAxiosRequestConfig {
     requestOptions?: RequestOptions;
   }

@@ -121,15 +121,17 @@ export class VAxios {
   uploadFile<T = any>(config: AxiosRequestConfig, params: UploadCustomRequestOptions) {
     let conf: CreateAxiosOptions = cloneDeep(config);
     const { file, data } = params;
-    const transform = this.getTransform();
+    if (config.isChecked) {
+      const transform = this.getTransform();
 
-    const { requestOptions } = this.options;
+      const { requestOptions } = this.options;
 
-    const opt: RequestOptions = Object.assign({}, requestOptions, params);
+      const opt: RequestOptions = Object.assign({}, requestOptions, params);
 
-    const { beforeRequestHook } = transform || {};
-    if (beforeRequestHook && isFunction(beforeRequestHook)) {
-      conf = beforeRequestHook(conf, opt);
+      const { beforeRequestHook } = transform || {};
+      if (beforeRequestHook && isFunction(beforeRequestHook)) {
+        conf = beforeRequestHook(conf, opt);
+      }
     }
 
     const formData = new FormData();
