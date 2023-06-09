@@ -30,7 +30,7 @@
           :key="index"
           class="absolute w-16px h-16px bg-primary rounded-8px animate-pulse"
           :class="item"
-        />
+        ></div>
       </div>
     </div>
     <h2 class="text-28px font-500 text-#646464">

@@ -1,4 +1,5 @@
 import { CSSProperties } from 'vue';
+import type { UploadFileParams } from '@/api/request/types';
 import type {
   InputProps,
   InputNumberProps,
@@ -18,7 +19,6 @@ import type {
   RateProps,
   TagProps,
   UploadProps,
-  UploadCustomRequestOptions,
 } from 'naive-ui';
 
 interface NInput {
@@ -89,7 +89,7 @@ interface Upload {
   component: 'Upload';
   componentProps?: UploadProps & {
     type?: string[];
-    api?: (options: UploadCustomRequestOptions) => void;
+    api?: (options: UploadFileParams) => void;
   };
 }
 

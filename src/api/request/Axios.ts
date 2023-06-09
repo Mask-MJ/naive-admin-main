@@ -9,9 +9,8 @@ import axios from 'axios';
 import qs from 'qs';
 import { cloneDeep, isFunction } from 'lodash-es';
 import axiosRetry from 'axios-retry';
-import type { RequestOptions, Result } from './types';
+import type { RequestOptions, Result, UploadFileParams } from './types';
 import type { CreateAxiosOptions } from './axiosTransform';
-import type { UploadCustomRequestOptions } from 'naive-ui';
 import { AxiosCanceler } from './axiosCancel';
 import { ContentTypeEnum, RequestEnum } from './httpEnum';
 
@@ -118,9 +117,10 @@ export class VAxios {
   /**
    * @description:  File Upload
    */
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadCustomRequestOptions) {
+  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
     let conf: CreateAxiosOptions = cloneDeep(config);
     const { file, data } = params;
+    if (!file) return;
     if (config.isChecked) {
       const transform = this.getTransform();
 
@@ -135,12 +135,21 @@ export class VAxios {
     }
 
     const formData = new FormData();
+    const customFilename = params.name || 'file';
+
     if (data) {
       Object.keys(data).forEach((key) => {
-        formData.append(key, data[key as keyof UploadCustomRequestOptions['data']]);
+        const value = params.data![key];
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            formData.append(`${key}[]`, item);
+          });
+          return;
+        }
+        formData.append(key, data[key as keyof UploadFileParams['data']]);
       });
     }
-    formData.append(file.name, file.file as File);
+    formData.append(customFilename, file);
 
     return this.axiosInstance.request<T>({
       ...conf,

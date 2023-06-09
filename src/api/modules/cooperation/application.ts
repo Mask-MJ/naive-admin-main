@@ -1,4 +1,4 @@
-import type { UploadCustomRequestOptions } from 'naive-ui';
+import type { UploadFileParams } from '@/api/request/types';
 import type {
   AppListParams,
   Applist,
@@ -43,5 +43,5 @@ export const deleteGroup = (id: string) => defHttp.delete({ url: Api.deleteGroup
 export const changeStatus = ({ id, enable }: EnableStatusParams) =>
   defHttp.put({ url: `${Api.enableStatus}/${id}/${enable}` });
 
-export const uploadIcon = (params: UploadCustomRequestOptions) =>
+export const uploadIcon = (params: UploadFileParams) =>
   defHttp.uploadFile({ url: Api.uploadIcon, isChecked: true }, params);

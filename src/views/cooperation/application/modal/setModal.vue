@@ -23,6 +23,7 @@
     try {
       await validate();
       const result = getPathsValue();
+      result.icon = result.icon[0];
       await (result.id ? updateApp(result) : addApp(result));
       emits('success');
       closeModal();
