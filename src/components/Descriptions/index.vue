@@ -7,7 +7,7 @@
   const emits = defineEmits(['register']);
   const props = defineProps({
     schema: { type: Array as PropType<DescItem[]>, default: () => [] },
-    data: { type: Object },
+    data: { type: Object, default: () => {} },
     title: { type: String, default: '' },
     labelPlacement: { type: String, default: 'left' },
     bordered: { type: Boolean, default: false },
@@ -20,9 +20,18 @@
     () => ({ ...unref(attrs), ...unref(getMergeProps) } as DescriptionProps),
   );
 
+  const getSchema = computed(() => {
+    const { schema, data } = unref(getMergeProps);
+    return schema.filter((item) => {
+      const { show = true } = item;
+      return isFunction(show) ? show(data) : show;
+    });
+  });
+
   const getItemProps = computed(() => (item: DescItem) => {
-    const { show, span, label } = item;
-    return { show, span, label };
+    const { span, label } = item;
+
+    return { span, label };
   });
 
   const renderItem = computed(() => (item: DescItem) => {
@@ -49,10 +58,8 @@
 
 <template>
   <NDescriptions v-bind="getDescriptionsProps">
-    <n-descriptions-item v-for="item in schema" :key="item.path" v-bind="getItemProps(item)">
-      {{ renderItem(item) }}
+    <n-descriptions-item v-for="item in getSchema" :key="item.path" v-bind="getItemProps(item)">
+      <renderItem v-bind="item" />
     </n-descriptions-item>
   </NDescriptions>
 </template>
-
-<style scoped></style>

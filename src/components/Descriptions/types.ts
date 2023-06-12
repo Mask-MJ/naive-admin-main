@@ -2,7 +2,7 @@ import type { DescriptionsProps, DescriptionItemProps } from 'naive-ui';
 
 export type DescItem = DescriptionItemProps & {
   path: string;
-  show?: (...arg: any) => boolean;
+  show?: boolean | ((...arg: any) => boolean);
   // render
   render?: (
     val: any,

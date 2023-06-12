@@ -98,9 +98,8 @@
     propsData.formValues = getValues.value;
 
     let value = 'value';
-    if (isCheck) {
-      value = 'checked';
-    } else if (isTree) {
+
+    if (isTree) {
       value = 'checkedKeys';
     } else if (component === 'NDatePicker' && componentProps?.valueFormat) {
       value = 'formattedValue';

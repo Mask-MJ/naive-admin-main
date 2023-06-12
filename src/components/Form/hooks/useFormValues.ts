@@ -10,9 +10,8 @@ import {
   isFunction,
   isString,
   set,
-  isNumber,
 } from 'lodash-es';
-import { dateUtil, formatToDate } from '@/utils/dateUtil';
+import { dateUtil } from '@/utils/dateUtil';
 
 interface UseFormValuesContext {
   defaultValueRef: Ref<any>;
@@ -78,9 +77,6 @@ export function useFormValues({
       const transformDateFunc = unref(getProps).transformDateFunc;
       if (isObject(value)) {
         value = transformDateFunc?.(value);
-      }
-      if (isArray(value) && isNumber(value[0]) && isNumber(value[1])) {
-        value = value.map((item) => formatToDate(item));
       }
 
       if (isArray(value) && value[0]?.format && value[1]?.format) {
