@@ -21,7 +21,6 @@
 
   const optionsRef = ref<SelectOption[]>([]);
   const loading = ref(false);
-  const isFirstLoad = ref(true);
 
   const getAttrs = computed(() => {
     return {
@@ -35,7 +34,7 @@
     () => props.params,
     () => {
       optionsRef.value = [];
-      !unref(isFirstLoad) && fetch();
+      fetch();
     },
     { deep: true },
   );

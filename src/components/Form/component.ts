@@ -1,5 +1,6 @@
 import { CSSProperties } from 'vue';
 import type { UploadFileParams } from '@/api/request/types';
+import type { FormActionType, FormSchema } from '@/components/Form/types';
 import type {
   InputProps,
   InputNumberProps,
@@ -46,15 +47,23 @@ interface NTreeSelect {
   componentProps?: TreeSelectProps;
 }
 
+type ApiSelectComponentProps = SelectProps & {
+  api: any;
+  params?: any;
+  immediate?: boolean;
+  resultField?: string;
+  allOptions?: boolean;
+};
+
 interface ApiSelect {
   component: 'ApiSelect';
-  componentProps?: SelectProps & {
-    api: any;
-    params?: any;
-    immediate?: boolean;
-    resultField?: string;
-    allOptions?: boolean;
-  };
+  componentProps?:
+    | ApiSelectComponentProps
+    | ((arg: {
+        schema: FormSchema;
+        formModel: any;
+        formActionType: FormActionType;
+      }) => ApiSelectComponentProps);
 }
 
 interface NTree {
