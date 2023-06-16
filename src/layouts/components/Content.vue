@@ -16,14 +16,8 @@
 <template>
   <router-view v-slot="{ Component, route }">
     <transition :name="themeStore.pageAnimateMode" mode="out-in" appear>
-      <keep-alive :include="tabStore.getCacheTabList">
-        <div
-          v-if="app.reloadFlag"
-          :key="(route.name as string)"
-          class="p-4 h-full flex-grow bg-#f6f9f8 dark:bg-#101014"
-        >
-          <component :is="Component" />
-        </div>
+      <keep-alive :exclude="tabStore.getNoCacheList">
+        <component :is="Component" v-if="app.reloadFlag" :key="route.name" />
       </keep-alive>
     </transition>
   </router-view>

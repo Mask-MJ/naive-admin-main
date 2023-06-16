@@ -10,7 +10,7 @@ import {
 } from '../helper/tab-helper';
 import type { GlobalTabRoute } from '../types';
 import { useRouterPush } from '@/router/hooks';
-import { map } from 'lodash-es';
+import { camelCase, upperFirst } from 'lodash-es';
 
 interface TabState {
   /** 多页签数据 */
@@ -44,8 +44,10 @@ export const useMultipleTabStore = defineStore('tab-store', {
     activeTabIndex(state) {
       return state.tabs.findIndex((tab) => tab.fullPath === state.activeTab);
     },
-    getCacheTabList(state): string[] {
-      return map(state.tabs, (tab) => (tab.name as string).split('-').pop() || '');
+    getNoCacheList(state): string[] {
+      return state.tabs
+        .filter((tab) => tab.meta.noCache)
+        .map((tab) => upperFirst(camelCase(tab.name as string)));
     },
   },
   actions: {
