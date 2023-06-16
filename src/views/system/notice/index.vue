@@ -58,13 +58,15 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增公告 </n-button>
-      <n-button type="error" @click="handleDelete"> 批量删除 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button class="mr-2" type="primary" @click="handleAdd"> 新增公告 </n-button>
+        <n-button type="error" @click="handleDelete"> 批量删除 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" @success="reload()" />
+  </PageWrapper>
 </template>
 
 <style scoped></style>

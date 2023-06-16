@@ -49,13 +49,15 @@
 </script>
 
 <template>
-  <Form @register="registerForm" />
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button type="primary" class="mr-2" @click="handleSubmit">提交</n-button>
-      <n-button type="error" @click="handleClose">关闭</n-button>
-    </template>
-  </Table>
+  <PageWrapper>
+    <Form @register="registerForm" />
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button type="primary" class="mr-2" @click="handleSubmit">提交</n-button>
+        <n-button type="error" @click="handleClose">关闭</n-button>
+      </template>
+    </Table>
+  </PageWrapper>
 </template>
 
 <style scoped></style>

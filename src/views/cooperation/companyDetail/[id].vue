@@ -94,6 +94,6 @@
         </n-space>
       </template>
     </Table>
+    <setModal @register="registerSetModal" @success="reload()" />
   </dark-mode-container>
-  <setModal @register="registerSetModal" @success="reload()" />
 </template>

@@ -51,12 +51,14 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button class="mr-2" type="primary" @click="openSetModel(true)"> 新增 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerSetModal" @success="reload()" />
-  <detailModal @register="registerDetailModal" />
-  <operateModal @register="registerOperateModal" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button class="mr-2" type="primary" @click="openSetModel(true)"> 新增 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerSetModal" @success="reload()" />
+    <detailModal @register="registerDetailModal" />
+    <operateModal @register="registerOperateModal" />
+  </PageWrapper>
 </template>

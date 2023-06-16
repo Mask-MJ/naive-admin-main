@@ -35,10 +35,12 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button type="primary" @click="openModal(true)"> 新增 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button type="primary" @click="openModal(true)"> 新增 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" @success="reload()" />
+  </PageWrapper>
 </template>

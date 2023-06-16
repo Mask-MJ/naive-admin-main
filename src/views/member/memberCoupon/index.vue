@@ -35,6 +35,8 @@
 </script>
 
 <template>
-  <Table @register="registerTable" />
-  <detailModal @register="registerModal" />
+  <PageWrapper>
+    <Table @register="registerTable" />
+    <detailModal @register="registerModal" />
+  </PageWrapper>
 </template>

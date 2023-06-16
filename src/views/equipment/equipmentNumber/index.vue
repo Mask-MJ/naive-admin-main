@@ -47,13 +47,15 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button type="primary" class="mr-2" @click="openModal(true)"> 新增 </n-button>
-      <n-button type="success" @click="openBatchModal(true)"> 批量生成 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" @success="reload()" />
-  <batchModal @register="registerBatchModal" @success="reload()" />
-  <codeModal @register="registerCodeModal" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button type="primary" class="mr-2" @click="openModal(true)"> 新增 </n-button>
+        <n-button type="success" @click="openBatchModal(true)"> 批量生成 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" @success="reload()" />
+    <batchModal @register="registerBatchModal" @success="reload()" />
+    <codeModal @register="registerCodeModal" />
+  </PageWrapper>
 </template>

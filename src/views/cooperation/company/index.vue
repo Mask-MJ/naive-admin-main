@@ -46,10 +46,12 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button type="primary" @click="openSetModel(true)"> 新增 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerSetModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button type="primary" @click="openSetModel(true)"> 新增 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerSetModal" @success="reload()" />
+  </PageWrapper>
 </template>

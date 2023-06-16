@@ -8,10 +8,10 @@
 </script>
 
 <template>
-  <div>
+  <PageWrapper>
     <n-input v-model:value="a" />
     <n-menu :options="menuOptions" />
-  </div>
+  </PageWrapper>
 </template>
 
 <style scoped></style>

@@ -1,9 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <DarkModeContainer class="p-4 h-full flex-grow">
+  <div class="p-4 h-full flex-grow bg-#f6f9f8 dark:bg-#101014">
     <slot />
-  </DarkModeContainer>
+  </div>
 </template>
-
-<style scoped></style>

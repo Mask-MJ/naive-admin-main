@@ -40,6 +40,8 @@
 </script>
 
 <template>
-  <Table @register="registerTable" />
-  <detailModal @register="registerDetailModal" />
+  <PageWrapper>
+    <Table @register="registerTable" />
+    <detailModal @register="registerDetailModal" />
+  </PageWrapper>
 </template>

@@ -46,12 +46,14 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增菜单 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button class="mr-2" type="primary" @click="handleAdd"> 新增菜单 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" @success="reload()" />
+  </PageWrapper>
 </template>
 
 <style scoped></style>

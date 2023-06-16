@@ -54,9 +54,11 @@
 </script>
 
 <template>
-  <Table @register="registerTable" />
-  <rechargeModal @register="registerRechargeModal" @success="reload()" />
-  <overChargeModal @register="registerOverChargeModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable" />
+    <rechargeModal @register="registerRechargeModal" @success="reload()" />
+    <overChargeModal @register="registerOverChargeModal" @success="reload()" />
+  </PageWrapper>
 </template>
 
 <style scoped></style>

@@ -47,15 +47,17 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-space>
-        <n-button type="primary" @click="openSetModel(true)"> 新增 </n-button>
-        <n-button type="success" @click="openGroupModel(true)"> 分组管理 </n-button>
-      </n-space>
-    </template>
-  </Table>
-  <setModal @register="registerSetModal" @success="reload()" />
-  <setGroupModal @register="registerGroupModal" @success="reload()" />
-  <detailModal @register="registerDetailModal" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-space>
+          <n-button type="primary" @click="openSetModel(true)"> 新增 </n-button>
+          <n-button type="success" @click="openGroupModel(true)"> 分组管理 </n-button>
+        </n-space>
+      </template>
+    </Table>
+    <setModal @register="registerSetModal" @success="reload()" />
+    <setGroupModal @register="registerGroupModal" @success="reload()" />
+    <detailModal @register="registerDetailModal" />
+  </PageWrapper>
 </template>

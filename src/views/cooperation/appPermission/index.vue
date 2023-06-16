@@ -34,10 +34,12 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button type="primary" @click="openModal(true)"> 用户权限管理 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button type="primary" @click="openModal(true)"> 用户权限管理 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" />
+  </PageWrapper>
 </template>

@@ -59,13 +59,15 @@
 </script>
 
 <template>
-  <Table @register="registerTable">
-    <template #toolbar>
-      <n-button class="mr-2" type="primary" @click="handleAdd"> 新增字典 </n-button>
-      <n-button type="error" @click="handleRefresh"> 刷新缓存 </n-button>
-    </template>
-  </Table>
-  <setModal @register="registerModal" @success="reload()" />
+  <PageWrapper>
+    <Table @register="registerTable">
+      <template #toolbar>
+        <n-button class="mr-2" type="primary" @click="handleAdd"> 新增字典 </n-button>
+        <n-button type="error" @click="handleRefresh"> 刷新缓存 </n-button>
+      </template>
+    </Table>
+    <setModal @register="registerModal" @success="reload()" />
+  </PageWrapper>
 </template>
 
 <style scoped></style>
