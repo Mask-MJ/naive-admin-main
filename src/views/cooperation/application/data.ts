@@ -75,7 +75,6 @@ export const schemas: FormSchema[] = [
     span: 8,
     componentProps: {
       options: [
-        { label: '全部', value: '' },
         { label: '启用', value: 1 },
         { label: '禁用', value: 0 },
       ],
@@ -88,10 +87,10 @@ export const schemas: FormSchema[] = [
     span: 8,
     componentProps: {
       api: getGroupList,
-      allOptions: true,
+      immediate: true,
       resultField: 'rows',
       labelField: 'name',
-      valueField: 'id',
+      valueField: 'name',
     },
   },
 ];

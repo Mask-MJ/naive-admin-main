@@ -21,6 +21,7 @@ export const schemas: FormSchema[] = [
     required: true,
     label: '充电类型',
     componentProps: {
+      immediate: true,
       api: getChargeType,
       labelField: 'dictLabel',
       valueField: 'dictCode',

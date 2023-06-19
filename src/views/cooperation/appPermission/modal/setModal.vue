@@ -32,7 +32,7 @@
             resultField: 'rows',
             labelField: 'userName',
             valueField: 'userId',
-            allOptions: true,
+            immediate: true,
             onUpdateValue: (val: string) => {
               selectId.value = val;
               reload({ searchInfo: { userId: val } });

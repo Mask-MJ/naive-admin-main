@@ -10,6 +10,8 @@
     },
     params: { type: Object as PropType<Recordable>, default: () => ({}) },
     immediate: { type: Boolean, default: true },
+    labelField: { type: String, default: '' },
+    valueField: { type: String, default: '' },
     resultField: { type: String, default: '' },
     allOptions: { type: Boolean, default: false },
   });
@@ -50,9 +52,10 @@
       }
 
       optionsRef.value = result.map((item: any) => ({
-        value: item.phoneNumber,
-        label: item.phoneNumber,
+        value: item[props.valueField] || item.id,
+        label: item[props.labelField] || item.phoneNumber,
       }));
+
       emitChange();
     } catch (error) {
       console.warn(error);
@@ -70,6 +73,7 @@
 
   function handleChange(e: string) {
     fetch();
+    // 如果有传入 valueField, 则返回对应的值
     emits('update:value', e);
   }
 </script>

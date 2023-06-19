@@ -15,7 +15,7 @@ export const schemas: FormSchema[] = [
     required: true,
     componentProps: {
       api: getBrandOptions,
-      allOptions: true,
+      immediate: true,
       labelField: 'name',
       valueField: 'id',
     },

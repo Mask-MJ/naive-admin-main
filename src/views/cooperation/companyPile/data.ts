@@ -14,7 +14,7 @@ export const schemas: FormSchema[] = [
     component: 'ApiSelect',
     span: 8,
     componentProps: {
-      allOptions: true,
+      immediate: true,
       api: getChargeStationOptions,
       labelField: 'name',
       valueField: 'id',

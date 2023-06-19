@@ -52,7 +52,7 @@ type ApiSelectComponentProps = SelectProps & {
   params?: any;
   immediate?: boolean;
   resultField?: string;
-  allOptions?: boolean;
+  queryField?: string;
 };
 
 interface ApiSelect {
@@ -126,6 +126,8 @@ interface AutoComplete {
     api?: any;
     params?: any;
     immediate?: boolean;
+    labelField?: string;
+    valueField?: string;
     resultField?: string;
     allOptions?: boolean;
   };

@@ -59,7 +59,7 @@ export const schemas: FormSchema[] = [
     ifShow: ({ values }) => values.isChargeCar,
     componentProps: {
       api: getCarModelList,
-      allOptions: true,
+      immediate: true,
       labelField: 'name',
       valueField: 'id',
     },

@@ -20,6 +20,7 @@ export const schemas = (type: 'set' | 'batch'): FormSchema[] => {
         api: getBrandOptions,
         labelField: 'name',
         valueField: 'id',
+        immediate: true,
         onUpdateValue: () => {
           const { setPathsValue } = formActionType;
           setPathsValue({ modelId: null });
@@ -34,6 +35,7 @@ export const schemas = (type: 'set' | 'batch'): FormSchema[] => {
       ifShow: ({ values }) => !!values.brandId,
       componentProps: ({ formModel }) => ({
         api: getModelOptions,
+        immediate: true,
         params: { brandId: formModel.brandId },
         labelField: 'name',
         valueField: 'id',

@@ -16,7 +16,7 @@ export const schemas: FormSchema[] = [
     required: true,
     componentProps: {
       api: getGroupList,
-      allOptions: true,
+      immediate: true,
       resultField: 'rows',
       labelField: 'name',
       valueField: 'id',
